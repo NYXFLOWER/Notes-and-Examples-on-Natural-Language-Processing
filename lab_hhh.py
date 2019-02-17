@@ -305,7 +305,7 @@ def main():
     # print('time: ', time.time() - start)
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # parser = argparse.ArgumentParser(description='Perceptron Classifier for Sentiment Analysis on Film Review.')
     # parser.add_argument('path', type=str, help='path to data directory')
     # args = parser.parse_args()
@@ -323,9 +323,9 @@ if __name__ == '__main__':
     # start = time.time()
     # PerceptronClassifier(path, mod=2)
     # print('time: ', time.time() - start)
-    main()
-    show_profile_log()
-
-    multy = multiprocessing.Pool()
-    
+    # main()
+    # show_profile_log()
+    #
+    # multy = multiprocessing.Pool()
+    #
 
