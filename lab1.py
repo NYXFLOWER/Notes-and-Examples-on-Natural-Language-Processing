@@ -1,4 +1,11 @@
 """
+Created by Hao Xu -- 8th February
+This code runs and tests on MacOS 10.13.6
+
+Command for run the code:
+    $ python lab1.py review_polarity
+
+The data used in this code is from the following book.
 @InProceedings{Pang+Lee:04a,
   author =       {Bo Pang and Lillian Lee},
   title =        {A Sentimental Education: Sentiment Analysis Using Subjectivity Summarization Based on Minimum Cuts},
@@ -8,69 +15,59 @@
 """
 import math
 import multiprocessing
-# from argparse import ArgumentParser
-from collections import Counter
-# from tqdm import tqdm
-from enum import Enum
-from itertools import dropwhile
-import re
-# import argparse
-import numpy as np
-import matplotlib.pyplot as plt
-import spacy
 import os
+import re
 import time
-from line_profiler import LineProfiler
+import sys
+from collections import Counter
+from enum import Enum
+import matplotlib.pyplot as plt
+import numpy as np
 
-lp = LineProfiler()
-prf_dic = {}
-nlp = spacy.load('en')
-
-class Model(Enum):
-    Unigram = "UNIGRAM"
-    Bigram = "BIGRAM"
-    Trigram = 'TRIGRAM'
-
-
-def prf(func):
-    if func.__name__ not in prf_dic:
-        prf_dic[func.__name__] = lp(func)
-    return prf_dic[func.__name__]
+# for each class (positive and negative)
+NUM_TRAIN = 800
+MUM_TEST = 200
 
 
-def show_profile_log():
-    lp.print_stats()
-
-
+# ################################################ #
+#    read from files and pre-precessing texts      #
+# ################################################ #
 def list_path(directory_path):
     neg_file_list, pos_file_list = os.listdir("%sneg/" % directory_path), os.listdir("%spos/" % directory_path)
-    train_pos = pos_file_list[:800]
-    train_neg = neg_file_list[:800]
-    test_pos = pos_file_list[800:]
-    test_neg = neg_file_list[800:]
+    train_pos = pos_file_list[:NUM_TRAIN]
+    train_neg = neg_file_list[:NUM_TRAIN]
+    test_pos = pos_file_list[NUM_TRAIN:]
+    test_neg = neg_file_list[NUM_TRAIN:]
 
     return [train_pos, train_neg, test_pos, test_neg], ['pos/', 'neg/', 'pos/', 'neg/']
 
 
+# use multi-processing to speed up
 def read_from_file(samples, directory_path, pn):
     doc_list = []
-    # count = 0
     for file in samples:
         file_path = directory_path+pn+file
         with open(file_path, 'r') as f:
             doc_list.append(re.sub("[^\w]", " ", f.read()).split())
-        # count += 1
-        # if count % 20 == 0:
-            # print(count)
     return doc_list
 
 
+# multi-processing tool
 def read_from_file_wrap(args):
     return read_from_file(*args)
 
 
+# ############################################### #
+# Training and testing the proceptron classifiers #
+# with the following three feature representation #
+# ############################################### #
+class Model(Enum):
+    BagOfWords = "UNIGRAM"
+    Bigram = "BIGRAM"
+    Trigram = 'TRIGRAM'
+
+
 class PerceptronClassifier:
-    @prf
     def __init__(self, x_list, mod, max_epoch=15):
         # processing data
         self.x_train_index, self.x_test_index = [], []
@@ -78,22 +75,23 @@ class PerceptronClassifier:
         self.feature_dict = {'???': 0}
         self.feature_index = 1
         self.mod = mod
+        self.max_epoch = max_epoch
 
         self.sign = lambda xx: math.copysign(1, xx)
 
         # data generate for train
         self.generate_x_feature(x_list[0], x_list[1])
-        self.y_train = [(lambda yy: 1 if yy < 800 else -1)(i) for i in range(1600)]
+        self.y_train = [(lambda yy: 1 if yy < NUM_TRAIN else -1)(i) for i in range(2*NUM_TRAIN)]
         self.w = np.zeros(self.feature_index)
+        print("     -> Classifier with %s loaded" % str(mod))
 
         # data generate for test
         self.generate_test_x(x_list[2], x_list[3])
-        self.y_test = [(lambda tt: 1 if tt < 200 else -1)(j) for j in range(400)]
+        self.y_test = [(lambda tt: 1 if tt < MUM_TEST else -1)(j) for j in range(2*MUM_TEST)]
 
         # train and test
-        self.__train(max_epoch)
-        self.__test()
-        self.__print_top_ten_feature()
+        self.error_rate_list_train = []
+        self.error_rate_list_test = []
 
     def generate_x_feature(self, x_train_pos, x_train_neg):
         x_train = x_train_pos
@@ -104,7 +102,7 @@ class PerceptronClassifier:
             # fit by feature type
             temp = x_train[i]
             if self.mod == Model.Bigram:
-                num_bi = len(temp)  - 1
+                num_bi = len(temp) - 1
                 x = [''.join([temp[j], temp[j+1]]) for j in range(num_bi)]
             elif self.mod == Model.Trigram:
                 num_tri = len(temp) - 2
@@ -116,9 +114,11 @@ class PerceptronClassifier:
             counter = Counter(x)
             value_list, index_list = self.__counter_to_lists(counter)
 
+            # append to list
             self.x_train_index.append(index_list)
             self.x_train_value.append(value_list)
 
+    # only consider the features which have been already in the feature dictionary
     def generate_test_x(self, x_test_pos, x_test_neg):
         x_test = x_test_pos
         x_test.extend(x_test_neg)
@@ -144,6 +144,7 @@ class PerceptronClassifier:
             self.x_test_index.append(index_list)
             self.x_test_value.append(value_list)
 
+    # function used in generate training and testing feature vectors
     def __counter_to_lists(self, counter):
         value_list, index_list = [1], [0]
         for feature, frequency in counter.items():
@@ -154,16 +155,14 @@ class PerceptronClassifier:
             index_list.append(self.feature_dict[feature])
         return value_list, index_list
 
-    def __train(self, max_epoch):
-        np.random.seed(10)
-        # pbar = tqdm(total=max_epoch)
-        sample_list = [i for i in range(1600)]
+    # train model
+    def train(self, max_epoch):
+        np.random.seed(10)                                          # random seed for reproducible
+        sample_list = [i for i in range(2*NUM_TRAIN)]
         w_pre, w_sum = np.zeros(self.feature_index), np.zeros(self.feature_index)
-        error_rate_list_train = []
-        error_rate_list_test = []
 
-        for i in range(max_epoch):
-            np.random.shuffle(sample_list)
+        for i in range(max_epoch):                                  # multiple passes
+            np.random.shuffle(sample_list)                          # shuffle training samples
             for sample_index in sample_list:
                 feature_index = self.x_train_index[sample_index]
                 x = self.x_train_value[sample_index]
@@ -175,50 +174,39 @@ class PerceptronClassifier:
                 w_sum += w_pre
 
             # calculate error rate for each epoch
-            self.w = w_sum/(i+1)/1600
+            self.w = w_sum/(i+1)/2/NUM_TRAIN                         # the average of all the weight vectors
             accurcy = self.__training_error()
-            error_rate_list_train.append(1 - accurcy)
+            self.error_rate_list_train.append(1 - accurcy)
 
             accurcy_test = self.__test()
-            error_rate_list_test.append(1 - accurcy_test)
-            # print("the accurcy is", accurcy)
-            # pbar.update(1)
+            self.error_rate_list_test.append(1 - accurcy_test)
 
-        # pbar.close()
+        self.__print_top_ten_feature()
 
-        # print('Run: plotting training error...')
-        plt.figure()
-        plt.plot(error_rate_list_train, 'r')
-        plt.plot(error_rate_list_test, 'y')
-        plt.title('Training and Testing Error for 10 epochs')
-        plt.show()
-
-    @prf
+    # used in train function
     def __training_error(self):
-        # print('Calculating training error ....')
         prediction = []
-        for i in range(1600):
+        for i in range(2*NUM_TRAIN):
             features = self.x_train_index[i]
             x = self.x_train_value[i]
             w = self.w[features]
             prediction.append(self.__predict(x, w))
-        # predictions = [self.__predict(self.x_test_value[i], self.w[self.x_test_index[i]]) for i in range(40)]
         accuracy_rate = self.__accuracy(prediction, self.y_train)
-        # print("accuracy rate is: {:.2f} \%".format(accuracy_rate * 100))
         return accuracy_rate
 
+    # used in train function
     def __test(self):
         prediction = []
-        for i in range(400):
+        for i in range(2*MUM_TEST):
             features = self.x_test_index[i]
             x = self.x_test_value[i]
             w = self.w[features]
             prediction.append(self.__predict(x, w))
-        # predictions = [self.__predict(self.x_test_value[i], self.w[self.x_test_index[i]]) for i in range(40)]
         accuracy_rate = self.__accuracy(prediction, self.y_test)
-        # print("Model ", self.mod, " - accuracy rate is: {:.2f} \%".format(accuracy_rate * 100))
+        # print("Model ", self.mod, " - accuracy rate is: {:.2f}%".format(accuracy_rate * 100))
         return accuracy_rate
 
+    # used in both train function and test function
     def __predict(self, x, w):
         return self.sign(np.dot(x, w))
 
@@ -227,45 +215,60 @@ class PerceptronClassifier:
         correct = np.count_nonzero(np.add(predictions, y))
         return correct / len(y)
 
+    # used in train function
     def __print_top_ten_feature(self):
         features = list(self.feature_dict.keys())
-        # positive
         ind_feature = np.argpartition(self.w, -10)[-10:]
-        # top_feat = {features[i] : w[i] for i in ind_feature}
-        print("The top ten positive features for ", self.mod, " :")
+        print("     The unsorted top ten positive features for ", self.mod, " :")
         for i in ind_feature:
-            print("[", features[i], "]: ", self.w[i])
+            print("       -> [", features[i], "]: ", "{:.2f}".format(self.w[i]))
 
-        # negative
-        ind_feature = np.argpartition(self.w, 10)[:10]
-        print("The top ten negative features for ", self.mod, " :")
-        for i in ind_feature:
-            print("[", features[i], "]: ", self.w[i])
+    # call at the end of the program
+    def plot(self):
+        xxx = [i+1 for i in range(self.max_epoch)]
+        title = ''.join(['Training and Testing Error for ', str(self.max_epoch), ' epochs with ', str(self.mod)])
+        plt.figure()
+        plt.plot(xxx, self.error_rate_list_train, 'r', label='training error')
+        plt.plot(xxx, self.error_rate_list_test, 'y', label='testing error')
+        plt.xticks(xxx)
+        plt.ylim((0, 0.3))
+        plt.title(title)
+        plt.grid()
+        plt.legend()
+        plt.savefig(title+'.jpg')
+        plt.show()
 
-def init(x_res, mod):
-    PerceptronClassifier(x_res, mod)
 
+# ################################################ #
+#                   RUN FROM HERE                  #
+# ################################################ #
 if __name__ == '__main__':
-    t = time.time()
-    path = './review_polarity/txt_sentoken/'
+    path = os.path.join(sys.argv[1] + "/txt_sentoken/")
     path_list, pn_list = list_path(path)
-    paths = [path for i in range(4)]
+    pool = multiprocessing.Pool()
 
     # read from file and split text to string list
-    pool = multiprocessing.Pool()
+    print("--> Processing Data...")
+    t1 = time.time()
+    paths = [path for i in range(4)]
     x_res = pool.map(read_from_file_wrap, zip(path_list, paths, pn_list))
+    print("Finished... Time cost: ", "{:.2f}".format(time.time() - t1), "\n")
+
+    # initial classifiers
+    print("--> Training and Testing...")
+    t2 = time.time()
+    model_list = [Model.BagOfWords, Model.Bigram, Model.Trigram]
+    classifier_list = [PerceptronClassifier(x_res, mod) for mod in model_list]
+    print()
+    # training
+    [pool.apply_async(classifier.train(15)) for classifier in classifier_list]
+
+    # close multiple processing and wait for merging
     pool.close()
     pool.join()
-    # print(time.time() - t)
 
-    # t = time.time()
-    # a = PerceptronClassifier(x_res, Model.Trigram)
+    print("Finished ALL... Time cost: ", "{:.2f}".format(time.time() - t2))
 
-    model = [Model.Unigram, Model.Bigram, Model.Trigram]
-
-    pool = multiprocessing.Pool()
-    for i in range(3):
-        pool.apply_async(init, (x_res, model[i]))
-    pool.close()
-    pool.join()
-    print(time.time() - t)
+    # plot training and testing error for each classifier
+    for classifier in classifier_list:
+        classifier.plot()
