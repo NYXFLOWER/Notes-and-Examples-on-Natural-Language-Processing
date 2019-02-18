@@ -289,13 +289,8 @@ class PerceptronClassifier:
             return 'bag of words'
 
 
-
-
-
-
 def show_profile_log():
     lp.print_stats()
-
 
 @prf
 def main():
