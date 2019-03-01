@@ -8,6 +8,7 @@
 ### Books
 - Jurafsky and Martin, [Speech and Language Processing, 3nd edition](https://web.stanford.edu/~jurafsky/slp3/)
 - Manning and Shuetze, Foundations of Statistical Natural Language Processing
+- Ted Briscoe, [Introduction to Linguistics for Natural Language Processing](https://www.cl.cam.ac.uk/teaching/1011/L100/introling.pdf)
 
 ### Datasets
 - Google Research [N-gram corpus](https://ai.googleblog.com/2006/08/all-our-n-gram-are-belong-to-you.html) (up to 5-gram)
