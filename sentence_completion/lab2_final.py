@@ -11,37 +11,37 @@ The data used in this code is from the following link.
 
 from collections import Counter
 from scipy.sparse import coo_matrix, lil_matrix
+from sys import getsizeof
 import numpy as np
 import re
 import time
 
 
 class SentenceComplete:
-    def __init__(self, corpus):
+    def __init__(self, corpus, coo_dict):
         """:param corpus: a list of words with <s> and </s>"""
-
-        self.coordinate_dict = {}
+        self.len_corpus = len(corpus)
+        self.coordinate_dict = coo_dict
         self.count_lil = self.__construct_count_matrix(corpus)
+        print("size of 157594*157594 'uint8' coo_lil:     %5d bytes " % getsizeof(lil_matrix))
 
     def __construct_count_matrix(self, corpus):
-        counter_unigram = Counter(corpus)
-
-        dimension = len(counter_unigram)
+        # counter_unigram = Counter(corpus)
+        # dimension = len(counter_unigram)
 
         # construct coordinate dictionary
-        keys = list(counter_unigram.keys())
-        values = list(i for i in range(dimension))
-        self.coordinate_dict = dict(zip(keys, values))
+        # keys = list(counter_unigram.keys())
+        # values = list(i for i in range(dimension))
 
         # sparse matrix for unigram: diagonal
-        coo_uni = coo_matrix((list(counter_unigram.values()),
-                              (values, values)),
-                             shape=(dimension, dimension),
-                             dtype=np.dtype('uint8'))
+        # coo_uni = coo_matrix((list(counter_unigram.values()),
+        #                       (values, values)),
+        #                      shape=(dimension, dimension),
+        #                      dtype=np.dtype('uint8'))
 
         # construct bigram counter (list of string pairs -> list of int pairs)
-        int_corpus = [self.coordinate_dict[word] for word in corpus]
-        counter_bigram = Counter(zip(int_corpus, int_corpus[1:]))
+        # int_corpus = [self.coordinate_dict[word] for word in corpus]
+        # counter_bigram = Counter(zip(int_corpus, int_corpus[1:]))
 
         # sparse matrix for bigram
         # rc = np.array(list(counter_bigram.keys()), dtype=str)
@@ -53,18 +53,38 @@ class SentenceComplete:
         #                     shape=(dimension, dimension),
         #                     dtype=np.dtype('uint8'))
 
-        lil_bi = coo_matrix((dimension, dimension), dtype=np.dtype('uint8')).tolil()
-        for key, value in counter_bigram.items():
-            lil_bi[key] = value
+        # lil_bi = coo_matrix((dimension, dimension), dtype=np.dtype('uint8')).tolil()
+        # for key, value in counter_bigram.items():
+        #     lil_bi[key] = value
 
-        return coo_uni.tolil() + lil_bi
+        # ----------------------------------------------------------#
+        values = [1 for i in range(self.len_corpus)]
+        # sparse matrix for unigram: diagonal
+        coo_uni = coo_matrix((values, (corpus, corpus)),
+                             shape=(self.len_corpus, self.len_corpus),
+                             dtype=np.dtype('uint8'))
+
+        # sparse matrix for bigram
+        values.pop()
+        coo_bi = coo_matrix((values, (corpus[:-1], corpus[1:])),
+                            shape=(self.len_corpus, self.len_corpus),
+                            dtype=np.dtype('uint8'))
+
+        # ----------------------------------------------------------#
+        print("size of 157594*157594 'uint8' coo_matrix : %5d bytes" % getsizeof(coo_uni + coo_bi))
+
+        return (coo_uni + coo_bi).tolil()
+        # return coo_uni.tolil() + lil_bi
 
     def test(self, questions, num_q=10):
         count_c1 = np.zeros(shape=(1, num_q), dtype=np.dtype('uint8'))
         count_c2 = np.zeros(shape=(1, num_q), dtype=np.dtype('uint8'))
         count_join_c1 = np.zeros(shape=(2, num_q), dtype=np.dtype('float64'))
-        count_join_c2 = np.zeros(shape=(2, num_q), dtype=np.dtype('float64'))
+        count_join_c2 = np.zeros(shape=(2, num_q), dtype=np.dtype('float32'))
         c1_list, c2_list = [], []
+
+        print("size of 2*10 float64 nparray: %4d bytes" % getsizeof(count_join_c1))
+        print("size of 2*10 float32 nparray: %4d bytes" % getsizeof(count_join_c2))
 
         for i in range(num_q):
             words = questions[i].split()
@@ -82,8 +102,12 @@ class SentenceComplete:
             count_join_c1[:, i] = [self.count_lil[coo_pre, coo_c1], self.count_lil[coo_c1, coo_next]]
             count_join_c2[:, i] = [self.count_lil[coo_pre, coo_c2], self.count_lil[coo_c2, coo_next]]
 
-        print("Unique Words: ", len(self.coordinate_dict))
-        format = ''
+        print("Join count: first row for candidate with the previous, second for the next")
+        print("--> c1: ")
+        print(count_join_c1)
+        print("--> c2: ")
+        print(count_join_c2)
+
         # Unigram
         print("Unigram: ")
         print("--> The first candidate:  ", ', '.join('{:6d}'.format(f) for f in count_c1.flatten()))
@@ -98,18 +122,17 @@ class SentenceComplete:
 
         # Bigram with Smoothing
         print("Bigram with Smoothing: ")
-        print(count_join_c1, count_join_c2)
-        score = np.sum(np.log(count_join_c1 + 1), axis=0) - np.log(np.array(count_c1) + len(self.coordinate_dict))
+        score = np.sum(np.log(count_join_c1 + 1), axis=0) - np.log(count_c1 + len(self.coordinate_dict))
         print("--> The first candidate:  ", ', '.join('{:6.2f}'.format(f) for f in score.flatten()))
-        score = np.sum(np.log(count_join_c2 + 1), axis=0) - np.log(np.array(count_c2) + len(self.coordinate_dict))
+        score = np.sum(np.log(count_join_c2 + 1), axis=0) - np.log(count_c2 + len(self.coordinate_dict))
         print("--> The second candidate: ", ', '.join('{:6.2f}'.format(f) for f in score.flatten()))
 
-        # Bigram with Smoothing
-        print("Bigram with Smoothing: ")
-        score = (count_join_c1[0, :] + 1) * (count_join_c1[1, :] + 1) / (np.array(count_c1) + len(self.coordinate_dict))
-        print("--> The first candidate:  ", ', '.join('{:6.5f}'.format(f) for f in score.flatten()))
-        score = (count_join_c2[0, :] + 1) * (count_join_c2[1, :] + 1) / (np.array(count_c2) + len(self.coordinate_dict))
-        print("--> The second candidate: ", ', '.join('{:6.5f}'.format(f) for f in score.flatten()))
+        # # Bigram with Smoothing
+        # print("Bigram with Smoothing: ")
+        # score = (count_join_c1[0, :] + 1) * (count_join_c1[1, :] + 1) / (np.array(count_c1) + len(self.coordinate_dict))
+        # print("--> The first candidate:  ", ', '.join('{:6.5f}'.format(f) for f in score.flatten()))
+        # score = (count_join_c2[0, :] + 1) * (count_join_c2[1, :] + 1) / (np.array(count_c2) + len(self.coordinate_dict))
+        # print("--> The second candidate: ", ', '.join('{:6.5f}'.format(f) for f in score.flatten()))
 
 
 # ################################################ #
@@ -118,29 +141,38 @@ class SentenceComplete:
 if __name__ == '__main__':
     t = time.time()
     # process corpus
-    corpus_path = '/Users/nyxfer/Documents/GitHub/nlp/sentence_completion/news-corpus-500k.txt'
-    with open(corpus_path, 'r') as f:
+    print("-------- Process Corpus and Questions --------")
+    path = '/Users/nyxfer/Documents/GitHub/nlp/sentence_completion/news-corpus-500k.txt'
+    with open(path, 'r') as f:
         s = f.readlines()
     corpus_list = []
     for line in s:      # add <s> and <\s> at the begin and end of each line
         corpus_list.append("<s>")
         corpus_list.extend(re.sub("[^\w]", ' ', line.lower()).split())     # convert to lower case
         corpus_list.append('</s>')
-    print(time.time() - t)
+
+    dimension_word = set(corpus_list)
+    dimension = len(dimension_word)
+    print("Number of words in corpus: ", len(corpus_list))
+    print("Number of unique words:    ", dimension)
+
+    coordinate_dict = dict(zip(dimension_word, [i for i in range(dimension)]))
+    corpus_list = [coordinate_dict[word] for word in corpus_list]  # int corpus
 
     # process questions
-    question_path = '/Users/nyxfer/Documents/GitHub/nlp/sentence_completion/questions.txt'
-    with open(question_path, 'r') as q:
+    path = '/Users/nyxfer/Documents/GitHub/nlp/sentence_completion/questions.txt'
+    with open(path, 'r') as q:
         question_list = q.readlines()
     # answer_list = ['whether', 'through', 'piece', 'court', 'allowed',
     #           'check', 'hear', 'cereal', 'chews', 'sell']
 
     # train and test model
-    sc = SentenceComplete(corpus_list)
-    print(time.time() - t)
-
+    print("-------- Train Language Models --------")
+    sc = SentenceComplete(corpus_list, coordinate_dict)
+    print("-------- Test Model Performance --------")
     sc.test(question_list)
-    print(time.time() - t)
+    print("-------- Finished --------")
+    print("Total time cost: %6.2f s" % (time.time() - t))
 
 
 
