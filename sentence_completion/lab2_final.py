@@ -8,10 +8,9 @@ Command for run the code:
 The data used in this code is from the following link.
 
 """
-
-from collections import Counter
 from scipy.sparse import coo_matrix, lil_matrix
-from sys import getsizeof
+import os
+import sys
 import numpy as np
 import re
 import time
@@ -23,7 +22,7 @@ class SentenceComplete:
         self.len_corpus = len(corpus)
         self.coordinate_dict = coo_dict
         self.count_lil = self.__construct_count_matrix(corpus)
-        print("size of 157594*157594 'uint8' coo_lil:     %5d bytes " % getsizeof(lil_matrix))
+        print("size of 157594*157594 'uint8' lil_matrix:     %5d bytes " % sys.getsizeof(lil_matrix))
 
     def __construct_count_matrix(self, corpus):
         # counter_unigram = Counter(corpus)
@@ -71,9 +70,10 @@ class SentenceComplete:
                             dtype=np.dtype('uint8'))
 
         # ----------------------------------------------------------#
-        print("size of 157594*157594 'uint8' coo_matrix : %5d bytes" % getsizeof(coo_uni + coo_bi))
+        coo = coo_uni + coo_bi
+        print("size of 157594*157594 'uint8' coo_matrix : %5d bytes" % sys.getsizeof(coo))
 
-        return (coo_uni + coo_bi).tolil()
+        return coo.tolil()
         # return coo_uni.tolil() + lil_bi
 
     def test(self, questions, num_q=10):
@@ -83,8 +83,8 @@ class SentenceComplete:
         count_join_c2 = np.zeros(shape=(2, num_q), dtype=np.dtype('float32'))
         c1_list, c2_list = [], []
 
-        print("size of 2*10 float64 nparray: %4d bytes" % getsizeof(count_join_c1))
-        print("size of 2*10 float32 nparray: %4d bytes" % getsizeof(count_join_c2))
+        print("size of 2*10 float64 nparray: %4d bytes" % sys.getsizeof(count_join_c1))
+        print("size of 2*10 float32 nparray: %4d bytes" % sys.getsizeof(count_join_c2))
 
         for i in range(num_q):
             words = questions[i].split()
@@ -139,10 +139,15 @@ class SentenceComplete:
 #                   RUN FROM HERE                  #
 # ################################################ #
 if __name__ == '__main__':
+    abs_path = os.path.abspath('.')
+    # corpus_path = os.path.join(abs_path, sys.argv[1])
+    # question_path = os.path.join(abs_path, sys.argv[2])
+
     t = time.time()
     # process corpus
     print("-------- Process Corpus and Questions --------")
-    path = '/Users/nyxfer/Documents/GitHub/nlp/sentence_completion/news-corpus-500k.txt'
+    # path = '/Users/nyxfer/Documents/GitHub/nlp/sentence_completion/news-corpus-500k.txt'
+    path = os.path.join(abs_path, sys.argv[1])
     with open(path, 'r') as f:
         s = f.readlines()
     corpus_list = []
@@ -160,7 +165,8 @@ if __name__ == '__main__':
     corpus_list = [coordinate_dict[word] for word in corpus_list]  # int corpus
 
     # process questions
-    path = '/Users/nyxfer/Documents/GitHub/nlp/sentence_completion/questions.txt'
+    # path = '/Users/nyxfer/Documents/GitHub/nlp/sentence_completion/questions.txt'
+    path = os.path.join(abs_path, sys.argv[2])
     with open(path, 'r') as q:
         question_list = q.readlines()
     # answer_list = ['whether', 'through', 'piece', 'court', 'allowed',
