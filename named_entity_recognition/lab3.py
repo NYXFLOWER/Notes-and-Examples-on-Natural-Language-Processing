@@ -65,19 +65,24 @@ class StructuredProceptron:
     def __init__(self, corpus):
         self.corpus = corpus
         self.label_space = self.__construct_candidate_label()
+
+        # model 1
         self.cscl_space = self.__construct_cscl()    # Current Sample-Current Label Feature Space
         self.coo_1 = dict(zip(self.cscl_space.keys(), list(range(len(self.cscl_space)))))
 
-        self.plcl_space = self.__construct_plcl()    # Previous Label-Current Label Feature Space
-        self.coo_2 = dict(zip(self.plcl_space.keys(), list(range(len(self.plcl_space)))))
+        # model 2
+        self.cscl_plcl_space = self.__construct_plcl() | self.cscl_space    # Previous Label-Current Label Feature Space
+        self.coo_2 = dict(zip(self.cscl_plcl_space.keys(), list(range(len(self.cscl_plcl_space)))))
 
-        self.pscs_space = self.__construct_pscs()    # Previous Sample-Current Sample Feature Space
-        self.coo_3 = dict(zip(self.pscs_space.keys(), list(range(len(self.pscs_space)))))
+        # model 3
+        self.cscl_plcl_pscs_space = self.__construct_pscs() | self.cscl_plcl_space    # Previous Sample-Current Sample Feature Space
+        self.coo_3 = dict(zip(self.cscl_plcl_pscs_space.keys(), list(range(len(self.cscl_plcl_pscs_space)))))
 
-        self.lt_space = self.__construct_lt()        # Label Trigrams Space
-        self.coo_4 = dict(zip(self.lt_space.keys(), list(range(len(self.lt_space)))))
+        # model 4
+        self.cscl_plcl_pscs_lt_space = self.__construct_lt() | self.cscl_plcl_pscs_space        # Label Trigrams Space
+        self.coo_4 = dict(zip(self.cscl_plcl_pscs_lt_space.keys(), list(range(len(self.cscl_plcl_pscs_lt_space)))))
 
-    def train(self):
+    def train(self, ):
         w_1 = np.zeros(len(self.cscl_space), dtype=np.int64)
         w_2 = np.zeros(len(self.plcl_space), dtype=np.int64)
         w_3 = np.zeros(len(self.pscs_space), dtype=np.int64)
