@@ -61,8 +61,8 @@ def __construct_candidate_label(max_dim=5):
 
 def __construct_cscl(corpus):
     cscl = Counter(list(chain.from_iterable(corpus)))
-    # for key, count in dropwhile(lambda key_count: key_count[1] > 2, cscl.most_common()):
-    #     del cscl[key]
+    for key, count in dropwhile(lambda key_count: key_count[1] > 2, cscl.most_common()):
+        del cscl[key]
     return cscl
 
 
@@ -91,7 +91,45 @@ def __construct_pscs(corpus):
     return pscs
 
 
-def __train_structured_proceptron(corpus, feature_space, label_space_dict, mod=1, max_epoch=5):
+def __train(corpus, feature_space, label_space_dict, mod=1, max_epoch=5):
+    num_feature = len(feature_space)
+    num_sample = len(corpus)
+    w = dict(zip(feature_space.keys(), [0]*num_feature))
+    sample_index_list = [i for i in range(num_sample)]
+
+    # TODO
+    for i in range(max_epoch):
+        np.random.shuffle(sample_index_list)
+        for sample_index in sample_index_list:
+            [x, y_true] = list(zip(*(corpus[sample_index])))
+            label_space = label_space_dict[len(x)]
+
+            # true y
+            feature_set_true = set(zip(x, y_true)) & feature_space.keys()
+            score_true = sum([w[feature] * feature_space[feature] for feature in feature_set_true])
+
+            # candidate y
+            y_pred = y_true
+            current_highest_score = 0
+            y_pred_feature = set()
+            for y_candidate in label_space:
+                feature_set = set(zip(x, y_candidate)) & feature_space.keys()
+                score = sum([w[feature] * feature_space[feature] for feature in feature_set])
+                if score > current_highest_score:
+                    y_pred = y_candidate
+                    current_highest_score = score
+                    y_pred_feature = feature_set
+            # compare and update w
+            if current_highest_score > score_true:
+                for feature in feature_set_true:
+                    w[feature] += feature_space[feature]
+                for feature in y_pred_feature:
+                    w[feature] -= feature_space[feature]
+    return w
+
+
+# ----------------------------------------------------------------------------------------------- #
+def __train_structured_proceptron_with_sparse_matrix(corpus, feature_space, label_space_dict, mod=1, max_epoch=5):
     """ mod: 1, 2, 3 """
     num_feature_space = len(feature_space)
     num_corpus = len(corpus)
@@ -106,10 +144,9 @@ def __train_structured_proceptron(corpus, feature_space, label_space_dict, mod=1
 
             [x, y] = list(zip(*piece))
             label_space = label_space_dict[len(x)]
-            #
-            # phi_sparse = __feature_sparse_all(x, y, feature_space, label_space, mod)
-            # pred_ind = __predict_labe(phi_sparse, w)
-            pred_ind, phi_sparse = __train_piece(x, y, label_space, feature_space, mod, w)
+            phi_sparse = __feature_sparse_all(x, y, feature_space, label_space, mod)
+            pred_ind = __predict_labe(phi_sparse, w)
+            # pred_ind, phi_sparse = __train_piece(x, y, label_space, feature_space, mod, w)
             y_ind = label_space.index(y)
             if y_ind != pred_ind:
                 w += (phi_sparse.getrow(y_ind) - phi_sparse.getrow(pred_ind)).reshape((num_feature_space, 1))
@@ -118,13 +155,6 @@ def __train_structured_proceptron(corpus, feature_space, label_space_dict, mod=1
             print(i)
 
     return w_sum / max_epoch / num_corpus
-
-
-def __train_piece(x, y, label_space, feature_space, mod, w):
-    phi_sparse = __feature_sparse_all(x, y, feature_space, label_space, mod)
-    pred_ind = __predict_labe(phi_sparse, w)
-
-    return pred_ind, phi_sparse
 
 
 def __test(corpus, w, feature_space, label_space_dict, mod=1):
@@ -169,7 +199,7 @@ def __predict_labe(phi_sparse, w):
     pred_ind = np.argmax(score)
 
     return pred_ind
-
+# ----------------------------------------------------------------------------------------------- #
 
 # ################################################ #
 #                   RUN FROM HERE                  #
@@ -200,7 +230,9 @@ if __name__ == '__main__':
 
     # ----------------- Train Model -----------------
     t = time.time()
-    w_1 = __train_structured_proceptron(indexed_train_data, fspace_1, candidate_label, mod=1, max_epoch=1)
+    w_1 = __train(indexed_train_data, fspace_1, candidate_label, mod=1, max_epoch=1)
+
+    # w_1 = __train_structured_proceptron_with_sparse_matrix(indexed_train_data, fspace_1, candidate_label, mod=1, max_epoch=1)
     # w_2 = __train_structured_proceptron(indexed_train_data, fspace_2, candidate_label, mod=2, max_epoch=5)
     # w_3 = __train_structured_proceptron(indexed_train_data, fspace_3, candidate_label, mod=3, max_epoch=5)
 
@@ -212,11 +244,11 @@ if __name__ == '__main__':
         for (w, l) in sent:
             if w in word_index:
                 w = word_index[w]
-            temp.append((w, l))
+            temp.append((w, label_index[l]))
         indexed_test_data.append(temp)
 
-    score_1 = __test(indexed_test_data, w_1, fspace_1, candidate_label, mod=1)
+    # score_1 = __test(indexed_test_data, w_1, fspace_1, candidate_label, mod=1)
     # score_2 = __test(indexed_train_data, w_2, fspace_2, candidate_label, mod=2)
     # score_3 = __test(indexed_train_data, w_3, fspace_3, candidate_label, mod=3)
-    # print("Time cost: ", (time.time() - t))
+    print("Time cost: ", (time.time() - t))
     # print(score_1)
