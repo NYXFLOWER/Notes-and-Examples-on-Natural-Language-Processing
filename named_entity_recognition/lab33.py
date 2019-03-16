@@ -52,7 +52,6 @@ def __preprocess_data(label_index_dict, train_data_list):
     """ Function for indexing word in corpus and reconstruct training dataset. """
     word_index_dict = {}
     train_list = []
-    temp_list = []
     w_index = 0
 
     for sent in train_data_list:
@@ -200,17 +199,18 @@ def __feature_sparse_all(x, y, feature_dict, feature_keys, label_space, mod):
     coo_dict = dict(zip(feature_dict.keys(), list(range(len(feature_dict)))))
     row, col, data = [], [], []
     for i in range(len(label_space)):
-        feature_set = set(zip(x, label_space[i]))  # cscl
+        feature_counter = Counter(zip(x, label_space[i]))  # cscl
         if mod == 2:
-            feature_set = feature_set | set(zip(y, y[1:]))  # add plcl
+            feature_counter = feature_counter | Counter(zip(y, y[1:]))  # add plcl
         if mod == 3:
-            feature_set = feature_set | set(zip(y, y[1:]))  # add plcl
-            feature_set = feature_set | set(zip(x, x[1:]))  # add pscs
-        phi_coo = feature_set & feature_keys
-        for coo in phi_coo:
-            row.append(i)
-            col.append(coo_dict[coo])
-            data.append(feature_dict[coo])
+            feature_counter = feature_counter | Counter(zip(y, y[1:]))  # add plcl
+            feature_counter = feature_counter | Counter(zip(x, x[1:]))  # add pscs
+        # phi_coo = feature_set.keys() & feature_keys
+        for feature in feature_counter:
+            if feature in feature_keys:
+                row.append(i)
+                col.append(coo_dict[feature])
+                data.append(feature_counter[feature])
 
     feature_sparse = csr_matrix((data, (row, col)), shape=(len(label_space), len(feature_dict)))
 
