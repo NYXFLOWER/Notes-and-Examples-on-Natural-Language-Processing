@@ -28,3 +28,745 @@ BAGHDAD 1996-08-22	LOC O
 BAGHDAD 1996-08-22	LOC O
 THAWRA	ORG
 IRAQ	LOC
+- - - -	O O O O
+Dollar / mark ...	O O O O
+1.4871 ( 1.4935 )	O O O O
+Dollar / yen ....	O O O O
+108.50 ( 108.43 )	O O O O
+Pound / dollar ..	O O O O
+Gold ( ounce ) ..	O O O O O
+- - - -	O O O O
+Rostislav Khotin	PER PER
+KIEV 1996-08-23	LOC O
+TIRANA 1996-08-23	LOC O
+MOSCOW 1996-08-23	LOC O
+LOS ANGELES 1996-08-22	LOC LOC O
+LONDON 1996-08-23	LOC O
+SPA-FRANCORCHAMPS , Belgium 1996-08-23	LOC O LOC O
+Leading times	O O
+[ CORRECTED 05:30 GMT ]	O O O MISC O
+CARLSBAD , California 1996-08-22	LOC O LOC O
+Results from the	O O O
+number denotes seeding ) :	O O O O O
+Quarter-finals	O
+6-3 6-4	O O
+Second round	O O
+6-1 7-5	O O
+LONDON 1996-08-23	LOC O
+Results of English first division	O O MISC O O
+soccer matches on Friday :	O O O O O
+Tranmere 3 Grimsby 2	ORG O ORG O
+GLASGOW 1996-08-23	LOC O
+Result of a Scottish third	O O O MISC O
+East Stirling 0 Albion 1	ORG ORG O ORG O
+LONDON 1996-08-23	LOC O
+Third day	O O
+R. Harden 65 ) .	PER PER O O O
+Second day	O O
+72 not out ) .	O O O O O
+Northamptonshire 160-4 ( K. Curran	ORG O O PER PER
+79 not out ) .	O O O O O
+Worcestershire 10-0 .	ORG O O
+Lancashire	ORG
+LONDON 1996-08-23	LOC O
+LONDON 1996-08-23	LOC O
+Oval on Friday :	LOC O O O
+England first innings	LOC O O
+R. Croft not out 5	PER PER O O O
+Total 326	O O
+8-284 9-295	O O
+6-1-17-0	O
+Pakistan first innings	LOC O O
+Saeed Anwar not out 116	PER PER O O O
+Ijaz Ahmed not out 58	PER PER O O O
+Fall of wicket - 1-106	O O O O O
+LONDON 1996-08-23	LOC O
+Waqar Younis 4-95 )	PER PER O O
+LONDON 1996-08-23	LOC O
+TORONTO 1996-08-22	LOC O
+TORONTO 1996-08-22	LOC O
+Results from the Canadian Open	O O O MISC MISC
+Third round	O O
+6-4	O
+6-3	O
+6-3 6-4	O O
+6-2 6-1	O O
+6-4	O
+Republic ) 6-3 6-4	LOC O O O
+6-3	O
+JOHANNESBURG 1996-08-23	LOC O
+KUALA LUMPUR 1996-08-23	LOC LOC O
+Results in the Malaysian	O O O MISC
+seedings ) :	O O O
+Men 's singles , quarter-finals	O O O O O
+15-9 15-7	O O
+NEW YORK 1996-08-23	LOC LOC O
+NEW YORK 1996-08-23	LOC LOC O
+Major League Baseball	MISC MISC MISC
+AMERICAN LEAGUE	MISC MISC
+EASTERN DIVISION	MISC MISC
+W L PCT GB	O O O O
+BALTIMORE 67 59 .532 5	ORG O O O O
+BOSTON 64 64 .500 9	ORG O O O O
+TORONTO 59 69 .461 14	ORG O O O O
+CENTRAL DIVISION	MISC MISC
+CLEVELAND 76 51 .598 -	ORG O O O O
+CHICAGO 69 60 .535 8	ORG O O O O
+MINNESOTA 63 64 .496 13	ORG O O O O
+WESTERN DIVISION	MISC MISC
+TEXAS 74 54 .578 -	ORG O O O O
+SEATTLE 65 61 .516 8	ORG O O O O
+OAKLAND 62 68 .477 13	ORG O O O O
+FRIDAY , AUGUST 23 SCHEDULE	O O O O O
+SEATTLE AT BOSTON	ORG O LOC
+MILWAUKEE AT CLEVELAND	ORG O LOC
+CALIFORNIA AT BALTIMORE	ORG O LOC
+OAKLAND AT NEW YORK	ORG O LOC LOC
+TORONTO AT CHICAGO	ORG O LOC
+DETROIT AT KANSAS CITY	ORG O LOC LOC
+TEXAS AT MINNESOTA	ORG O LOC
+NATIONAL LEAGUE	MISC MISC
+EASTERN DIVISION	MISC MISC
+W L PCT GB	O O O O
+ATLANTA 79 47 .627 -	ORG O O O O
+MONTREAL 68 58 .540 11	ORG O O O O
+PHILADELPHIA 52 76 .406 28	ORG O O O O
+CENTRAL DIVISION	MISC MISC
+HOUSTON 68 60 .531 -	ORG O O O O
+WESTERN DIVISION	MISC MISC
+FRIDAY , AUGUST 23 SCHEDULE	O O O O O
+CHICAGO AT ATLANTA	ORG O LOC
+ST LOUIS AT HOUSTON	ORG ORG O LOC
+PITTSBURGH AT COLORADO	ORG O LOC
+NEW YORK AT LOS ANGELES	ORG ORG O LOC LOC
+PHILADELPHIA AT SAN DIEGO	ORG O LOC LOC
+MONTREAL AT SAN FRANCISCO	ORG O LOC LOC
+NEW YORK 1996-08-23	LOC LOC O
+Results of Major League	O O MISC MISC
+American League	MISC MISC
+BOSTON 2 Oakland 1	ORG O ORG O
+Seattle 10 BALTIMORE 3	ORG O ORG O
+California 12 NEW YORK 3	ORG O ORG ORG O
+Detroit 10 KANSAS CITY 3	ORG O ORG ORG O
+Texas 11 MINNESOTA 2	ORG O ORG O
+National League	MISC MISC
+COLORADO 10 St Louis 5	ORG O ORG ORG O
+Pittsburgh 8 HOUSTON 6	ORG O ORG O
+LOS ANGELES 8 Philadelphia 5	ORG ORG O ORG O
+Montreal 5 SAN FRANCISCO 4	ORG O ORG ORG O
+BALTIMORE 1996-08-22	LOC O
+LISBON 1996-08-23	LOC O
+LISBON 1996-08-23	LOC O
+Result of a Portuguese first	O O O MISC O
+Espinho 1 Sporting 3	ORG O ORG O
+BONN 1996-08-23	LOC O
+BRUSSELS 1996-08-23	LOC O
+BONN 1996-08-23	LOC O
+Halftime 0-0 .	O O O
+Attendance 18,500 .	O O O
+1-3 .	O O
+19,775 .	O O
+PARIS 1996-08-23	LOC O
+Attendance : 15,000 .	O O O O
+PARIS 1996-08-23	LOC O
+BONN 1996-08-23	LOC O
+Results of German first division	O O MISC O O
+soccer matches on Friday :	O O O O O
+St Pauli 4 Schalke 4	ORG ORG O ORG O
+Hansa Rostock 0 Hamburg 1	ORG ORG O ORG O
+Adrian Warner	PER PER
+BRUSSELS 1996-08-23	LOC O
+Masterkova clearly enjoyed it .	PER O O O O
+BRUSSELS 1996-08-23	LOC O
+venue , date ) :	O O O O O
+BRUSSELS 1996-08-23	LOC O
+STUTTGART , Germany 1996-08-23	LOC O LOC O
+Leading second round	O O O
+unless stated ) :	O O O O
+128 Ian Woosnam 64 64	O PER PER O O
+66 69	O O
+Adrian Warner	PER PER
+BRUSSELS 1996-08-23	LOC O
+BRUSSELS 1996-08-23	LOC O
+Leading results in the Brussels	O O O O MISC
+Women 's discus	O O O
+Women 's 100 metres hurdles	O O O O O
+Men 's 110 metres hurdles	O O O O O
+Women 's 5,000 metres	O O O O
+Men 's 100 metres	O O O O
+Men 's 400 metres hurdles	O O O O O
+Women 's 100 metres	O O O O
+Women 's 1,500 metres	O O O O
+3,000 metres steeplechase	O O O
+Men 's 400 metres	O O O O
+Men 's 200 metres	O O O O
+Women 's 1,000 metres	O O O O
+( world record )	O O O O
+Women 's 200 metres	O O O O
+Women 's 400 metres	O O O O
+Men 's 3,000 metres	O O O O
+Men 's discus	O O O
+Men 's triple jump	O O O O
+Men 's 1,500 metres	O O O O
+Women 's high jump	O O O O
+8 equal .	O O O
+8 equal .	O O O
+Men 's 10,000 metres	O O O O
+record )	O O
+LISBON 1996-08-23	LOC O
+Squad :	O O
+BONN 1996-08-23	LOC O
+Squad :	O O
+ATHENS 1996-08-23	LOC O
+Following are the European soccer	O O O MISC O
+x indicates seeded teams .	O O O O O
+GENEVA 1996-08-23	LOC O
+COLOMBO 1996-08-23	LOC O
+LUANDA 1996-08-23	LOC O
+- - - -	O O O O
+JORNAL DE ANGOLA	ORG ORG ORG
+JOHANNESBURG 1996-08-23	LOC O
+Analysts estimates of major	O O O O
+DAY--COMPANY----PERIOD--CONSENSUS----RANGE-------PVS	O
+ooOOoo	O
+CALGARY 1996-08-23	LOC O
+1996 1995	O O
+Shr C$ 0.04 C$ 0.08	O MISC O MISC O
+Net 1,196 2,232	O O O
+Revs 20,167 18,623	O O O
+6 MONTHS	O O
+Shr C$ 0.12 C$ 0.15	O MISC O MISC O
+Net 3,674 4,271	O O O
+Revs 41,752 35,711	O O O
+OTTAWA 1996-08-23	LOC O
+TORONTO 1996-08-23	LOC O
+-- Chicago newsdesk , 312-408-8787	O LOC O O O
+WASHINGTON 1996-08-23	LOC O
+MIAMI 1996-08-23	LOC O
+LONDON 1996-08-23	LOC O
+LATEST FIXTURES	O O
+- ASIA PACIFIC	O LOC LOC
+- MED / BLACK SEA	O LOC O LOC LOC
+- UK / CONT	O LOC O O
+- WESTERN HEMISPHERE	O LOC LOC
+------------------------------------------------------------	O
+- MIDDAY FIXTURES	O O O
+- ASIA / PACIFIC	O LOC O LOC
+- MED / BLACK SEA	O LOC O LOC LOC
+Saeed Anwar not out 116	PER PER O O O
+Ijaz Ahmed not out 58	PER PER O O O
+Extras 9	O O
+Fall of wicket - 1-106	O O O O O
+England 326 all out	LOC O O O
+SYDNEY 1996-08-23	LOC O
+-- Sydney Newsroom 61-2 9373-1800	O ORG ORG O O
+Ori Lewis	PER PER
+TAIBE , Israel 1996-08-23	LOC O LOC O
+DUBLIN 1996-08-23	LOC O
+GENEVA 1996-08-23	LOC O
+LAGOS 1996-08-23	LOC O
+NAIROBI 1996-08-23	LOC O
+ZAGREB 1996-08-23	LOC O
+BUDAPEST 1996-08-23	LOC O
+Gross foreign debt 27,535.5 27,246.5	O O O O O
+International reserves and	O O O
+other foreign assets 13,256.5 12,855.7	O O O O O
+Net foreign debt 14,278.9 14,390.7	O O O O O
+Net foreign debt of the	O O O O O
+government and NBH 9,510.9 10,056.4	O O ORG O O
+WARSAW 1996-08-23	LOC O
+GROZNY , Russia 1996-08-23	LOC O LOC O
+MOSCOW 1996-08-23	LOC O
+BELGRADE 1996-08-23	LOC O
+QUITO , Ecuador 1996-08-23	LOC O LOC O
+BRASILIA 1996-08-22	LOC O
+HONG KONG 1996-08-23	LOC LOC O
+Rana Sabbagh	PER PER
+AMMAN 1996-08-23	LOC O
+ANKARA 1996-08-23	LOC O
+WASHINGTON 1996-08-23	LOC O
+CHESAPEAKE , Va .	LOC O LOC O
+1996-08-23	O
+WASHINGTON 1996-08-23	LOC O
+Mass .	LOC O
+BOSTON 1996-08-23	LOC O
+FRANKFURT 1996-08-23	LOC O
+Lufthanseat .	ORG O
+FORECAST-	O
+TODAY ...	O O
+TONIGHT ...	O O
+TOMORROW ...	O O
+OUTLOOK ...	O O
+Temperatures near normal .	O O O O
+Source : Weather Services Corporation	O O ORG ORG ORG
+COLOMBO 1996-08-23	LOC O
+KATHMANDU 1996-08-23	LOC O
+KATHMANDU 1996-08-23	LOC O
+LONDON 1996-08-23	LOC O
+LONDON 1996-08-23	LOC O
+EXERCISE PERIOD 02.SEP.96-21.NOV.97 PAYDATE 30.AUG.96	O O O O O
+SPOT REFERENCE 24.90 DEM	O O O MISC
+LONDON 1996-08-23	LOC O
+Jordan expels Iraqi diplomat .	LOC O MISC O O
+AMMAN 1996-08-23	LOC O
+The government declined comment .	O O O O O
+DOHUK , Iraq 1996-08-23	LOC O LOC O
+BEIRUT 1996-08-23	LOC O
+Susan Nadeau	PER PER
+CHICAGO 1996-08-22	LOC O
+WASHINGTON 1996-08-22	LOC O
+Martin Wolk	PER PER
+SEATTLE 1996-08-22	LOC O
+WASHINGTON 1996-08-22	LOC O
+Wis .	LOC O
+CHICAGO 1996-08-22	LOC O
+Tommy Thompson said Thursday .	PER PER O O O
+-- Karen Pierog , 312-408-8647	O PER PER O O
+ANCHORAGE , Alaska 1996-08-22	LOC O LOC O
+Sgt .	O O
+Jail better . '	O O O O
+"	O
+Steve Barnes	PER PER
+LITTLE ROCK , Ark .	LOC LOC O LOC O
+1996-08-22	O
+Reuters Chicago Newsdesk - 312-408-8787	ORG ORG ORG O O
+SAN MATEO , Calif. 1996-08-23	LOC LOC O LOC O
+Terms were not disclosed .	O O O O O
+NEW YORK 1996-08-23	LOC LOC O
+AMSTERDAM 1996-08-23	LOC O
+Boskalis upgrades 1996 outlook .	ORG O O O O
+[ CORRECTED 13:12 GMT ]	O O O MISC O
+PAPENDRECHT , Netherlands 1996-08-23	LOC O LOC O
+ATHENS 1996-08-23	LOC O
+VALLETTA 1996-08-23	LOC O
+FRANKFURT 1996-08-23	LOC O
+Six months to June 30	O O O O O
+also covers snap FAT8222	O O O O
+Revenue from long-distance passenger	O O O O
+traffic 2,500 up 6.4 pct	O O O O O
+LONDON 1996-08-22	LOC O
+CANBERRA 1996-08-23	LOC O
+-- Sydney Newsroom 61-2 373-1800	O ORG ORG O O
+MELBOURNE 1996-08-23	LOC O
+SYDNEY 1996-08-23	LOC O
+SEOUL 1996-08-23	LOC O
+SEOUL 1996-08-23	LOC O
+TOKYO 1996-08-23	LOC O
+LATEST ACTUAL	O O
+( Group ) FORECAST YEAR-AGO	O O O O O
+Sales 8.70 8.67	O O O
+Net nil loss 447 mln	O O O O O
+TOKYO 1996-08-23	LOC O
+Sales 8.67 vs 9.33	O O O O
+Diluted EPS - vs -	O O O O O
+Lynne O'Donnell	PER PER
+HONG KONG 1996-08-23	LOC LOC O
+HONG KONG 1996-08-23	LOC LOC O
+Year ended March 31	O O O O
+Exceptional items nil	O O O
+Net 56.06	O O
+Turnover 531.52	O O
+Books close N / A	O O O O O
+Dividend payable N / A	O O O O O
+TOKYO 1996-08-23	LOC O
+SHANGHAI 1996-08-23	LOC O
+Turnover 115.259 vs 123.157	O O O O
+Net profit 20.318 vs 22.828	O O O O O
+PARIS 1996-08-23	LOC O
+DUBLIN 1996-08-23	LOC O
+IRISH INDEPENDENT	ORG ORG
+IRISH TIMES	ORG ORG
+SHANGHAI 1996-08-24	LOC O
+COMMACK , New York 1996-08-24	LOC O LOC LOC O
+Results from the	O O O
+number denotes seeding ) :	O O O O O
+Semifinals :	O O
+7-5 7-5	O O
+( 7-0 ) 6-3	O O O O
+CARLSBAD , Calif. 1996-08-24	LOC O LOC O
+Semifinals :	O O
+JYVASKYLA , Finland 1996-08-24	LOC O LOC O
+said the 37-year-old veteran .	O O O O O
+SPA-FRANCORCHAMPS , Belgium 1996-08-24	LOC O LOC O
+Grid positions	O O
+qualifying on Saturday :	O O O O
+Add grid :	O O O
+JYVASKYLA , Finland 1996-08-24	LOC O LOC O
+CARLSBAD , California 1996-08-24	LOC O LOC O
+Results from the	O O O
+number denotes seeding ) :	O O O O O
+Quarterfinals :	O O
+( Slovakia ) 6-3 6-3	O LOC O O O
+6-4 6-1	O O
+COMMACK , New York 1996-08-23	LOC O LOC LOC O
+Results from the	O O O
+denotes seeding ) :	O O O O
+Quarterfinals :	O O
+( 7-4 ) 6-2	O O O O
+( 7-4 ) 4-6 6-3	O O O O O
+6-2 6-3	O O
+AKRON , Ohio 1996-08-23	LOC O LOC O
+AKRON , Ohio 1996-08-23	LOC O LOC O
+Scores from the $ 2.1	O O O O O
+0 Steve Jones through 7	O PER PER O O
+0 Davis Love through 5	O PER PER O O
++1 Fred Couples through 15	O PER PER O O
++1 Fred Funk through 9	O PER PER O O
++1 Scott Hoch through 9	O PER PER O O
++2 D.A. Weibring through 12	O PER PER O O
++2 Clarence Rose through 9	O PER PER O O
++2 Duffy Waldorf through 4	O PER PER O O
++3 Jim Furyk through 16	O PER PER O O
++3 Corey Pavin through 14	O PER PER O O
++3 Craig Stadler through 14	O PER PER O O
++3 Brad Bryant through 12	O PER PER O O
++3 Tom Lehman through 11	O PER PER O O
++4 Willie Wood through 17	O PER PER O O
++5 Mark O'Meara through 15	O PER PER O O
++5 Loren Roberts through 9	O PER PER O O
++6 Scott McCarron 76 70	O PER PER O O
++7 Paul Stankowski through 15	O PER PER O O
++9 Tom Watson 79 70	O PER PER O O
+LONDON 1996-08-24	LOC O
+Results of European Super League	O O MISC MISC MISC
+Paris 14 Bradford 27	ORG O ORG O
+Wigan 78 Workington 4	ORG O ORG O
+LONDON 1996-08-24	LOC O
+LONDON 1996-08-24	LOC O
+Saturday :	O O
+Younis 4-95 )	PER O O
+Salim Malik not out 2	PER PER O O O
+Asif Mujtaba not out 1	PER PER O O O
+Mohammad Akam	PER PER
+LONDON 1996-08-24	LOC O
+Final day	O O
+Somerset 9 points ,	ORG O O O
+Durham 8 .	ORG O O
+Third day	O O
+Essex 532-8	ORG O
+M. Alleyne 4-80 ) .	PER PER O O O
+No play - rain .	O O O O O
+Hampshire 81-7 .	ORG O O
+42-3 .	O O
+Surrey 128-4	ORG O
+Lancashire 323	ORG O
+GLASGOW 1996-08-24	LOC O
+Results of Scottish league soccer	O O MISC O O
+matches on Saturday :	O O O O
+Premier division	O O
+Hibernian 0 Dunfermline 0	ORG O ORG O
+Kilmarnock 1 Celtic 3	ORG O ORG O
+Raith 0 Motherwell 3	ORG O ORG O
+Rangers 1 Dundee United 0	ORG O ORG ORG O
+Playing Sunday :	O O O
+Aberdeen v Hearts	ORG O ORG
+Division one	O O
+Airdrieonians 0 East Fife 0	ORG O ORG ORG O
+Clydebank 1 Stirling 0	ORG O ORG O
+Dundee 2 Greenock Morton 1	ORG O ORG ORG O
+Falkirk 1 Partick 0	ORG O ORG O
+Division two	O O
+Berwick 0 Stenhousemuir 6	ORG O ORG O
+Brechin 1 Ayr 1	ORG O ORG O
+Hamilton 2 Clyde 0	ORG O ORG O
+Stranraer 1 Livingston 2	ORG O ORG O
+Division three	O O
+Alloa 1 Arbroath 1	ORG O ORG O
+Cowdenbeath 1 Monstrose 0	ORG O ORG O
+Forfar 3 Inverness 1	ORG O ORG O
+Played Friday :	O O O
+East Stirling 0 Albion 1	ORG ORG O ORG O
+LONDON 1996-08-24	LOC O
+LONDON 1996-08-24	LOC O
+Results of English league soccer	O O MISC O O
+matches on Saturday :	O O O O
+Premier league	O O
+Aston Villa 2 Derby 0	ORG ORG O ORG O
+Chelsea 2 Coventry 0	ORG O ORG O
+Leicester 0 Arsenal 2	ORG O ORG O
+Liverpool 0 Sunderland 0	ORG O ORG O
+Newcastle 1 Sheffield Wednesday 2	ORG O ORG ORG O
+Nottingham Forest 1 Middlesbrough 1	ORG ORG O ORG O
+Tottenham 0 Everton 0	ORG O ORG O
+West Ham 2 Southampton 1	ORG ORG O ORG O
+Playing Sunday :	O O O
+Manchester United v Blackburn	ORG ORG O ORG
+Playing Monday :	O O O
+Leeds v Wimbledon	ORG O ORG
+Division one	O O
+Bolton 3 Norwich 1	ORG O ORG O
+Charlton 1 West Bromwich 1	ORG O ORG ORG O
+Crystal Palace 3 Oldham 1	ORG ORG O ORG O
+Ipswich 5 Reading 2	ORG O ORG O
+Oxford 5 Southend 0	ORG O ORG O
+Sheffield United 4 Birmingham 4	ORG ORG O ORG O
+Stoke 2 Manchester City 1	ORG O ORG ORG O
+Swindon 1 Port Vale 1	ORG O ORG ORG O
+Wolverhampton 1 Bradford 0	ORG O ORG O
+Played Friday :	O O O
+Tranmere 3 Grimsby 2	ORG O ORG O
+Playing Sunday :	O O O
+Barnsley v Huddersfield	ORG O ORG
+Division two	O O
+Brentford 3 Luton 2	ORG O ORG O
+Burnley 2 Walsall 1	ORG O ORG O
+Chesterfield 1 Bury 2	ORG O ORG O
+Peterborough 2 Crewe 2	ORG O ORG O
+Preston 0 Bristol Rovers 0	ORG O ORG ORG O
+Rotherham 1 Shrewsbury 2	ORG O ORG O
+Stockport 0 Notts County 0	ORG O ORG ORG O
+Watford 0 Millwall 2	ORG O ORG O
+Wrexham 4 Plymouth 4	ORG O ORG O
+Wycombe 1 Gillingham 1	ORG O ORG O
+York 1 Bournemouth 2	ORG O ORG O
+Division three	O O
+Barnet 1 Wigan 1	ORG O ORG O
+Cardiff 1 Brighton 0	ORG O ORG O
+Carlisle 0 Hull 0	ORG O ORG O
+Chester 1 Cambridge 1	ORG O ORG O
+Darlington 4 Swansea 1	ORG O ORG O
+Exeter 2 Scarborough 2	ORG O ORG O
+Hartlepool 2 Fulham 1	ORG O ORG O
+Hereford 1 Doncaster 0	ORG O ORG O
+Lincoln 1 Leyton Orient 1	ORG O ORG ORG O
+Northampton 3 Mansfield 0	ORG O ORG O
+Rochdale 0 Colchester 0	ORG O ORG O
+Scunthorpe 1 Torquay 0	ORG O ORG O
+Add Division two	O O O
+Bristol City 0 Blackpool 1	ORG ORG O ORG O
+LONDON 1996-08-24	LOC O
+Waqar Younis 4-95 ) .	PER PER O O O
+TORONTO 1996-08-23	LOC O
+Results from the Canadian Open	O O O MISC MISC
+Quarterfinals	O
+( Sweden ) 7-5 6-2	O LOC O O O
+7-6 ( 7-4 ) 6-1	O O O O O
+( Australia ) 7-5 6-4	O LOC O O O
+PRETORIA , South Africa 1996-08-24	LOC O LOC LOC O
+PRETORIA , South Africa 1996-08-24	LOC O LOC LOC O
+Scorers :	O O
+Conversion : Stranksy .	O O PER O
+BELGRADE 1996-08-24	LOC O
+Results of Yugoslav league	O O MISC O
+Division A	O O
+Cukaricki 0 Hajduk 2	ORG O ORG O
+Becej 2 Borac 0	ORG O ORG O
+Division B	O O
+Sutjeska 3 Sloboda 2	ORG O ORG O
+Loznica 0 Obilic 1	ORG O ORG O
+Standings :	O O
+WARSAW 1996-08-24	LOC O
+Results of Polish first division	O O MISC O O
+soccer matches on Saturday :	O O O O O
+MANILA 1996-08-24	LOC O
+SEOUL 1996-08-24	LOC O
+Results of South Korean	O O MISC MISC
+Samsung 13 Hyundai 3	ORG O ORG O
+Haitai 5 Hanwha 4	ORG O ORG O
+OB 4 Lotte 2	ORG O ORG O
+Ssangbangwool 1 LG 0	ORG O ORG O
+W D L PCT GB	O O O O O
+NEW YORK 1996-08-24	LOC LOC O
+Major League Baseball	MISC MISC MISC
+AMERICAN LEAGUE	MISC MISC
+EASTERN DIVISION	MISC MISC
+W L PCT GB	O O O O
+BALTIMORE 67 60 .528 6	ORG O O O O
+BOSTON 64 65 .496 10	ORG O O O O
+TORONTO 60 69 .465 14	ORG O O O O
+CENTRAL DIVISION	MISC MISC
+CLEVELAND 76 52 .594 -	ORG O O O O
+CHICAGO 69 61 .531 8	ORG O O O O
+MINNESOTA 64 64 .500 12	ORG O O O O
+WESTERN DIVISION	MISC MISC
+TEXAS 74 55 .574 -	ORG O O O O
+SEATTLE 66 61 .520 7	ORG O O O O
+OAKLAND 62 69 .473 13	ORG O O O O
+SATURDAY , AUGUST 24TH SCHEDULE	O O O O O
+SEATTLE AT BOSTON	ORG O LOC
+MILWAUKEE AT CLEVELAND	ORG O LOC
+CALIFORNIA AT BALTIMORE	ORG O LOC
+TORONTO AT CHICAGO	ORG O LOC
+OAKLAND AT NEW YORK	ORG O LOC LOC
+DETROIT AT KANSAS CITY	ORG O LOC LOC
+TEXAS AT MINNESOTA	ORG O LOC
+NATIONAL LEAGUE	MISC MISC
+EASTERN DIVISION	MISC MISC
+W L PCT GB	O O O O
+ATLANTA 80 47 .630 -	ORG O O O O
+MONTREAL 69 58 .543 11	ORG O O O O
+FLORIDA 59 70 .457 22	ORG O O O O
+PHILADELPHIA 53 76 .411 28	ORG O O O O
+CENTRAL DIVISION	MISC MISC
+HOUSTON 68 61 .527 1/2	ORG O O O O
+CHICAGO 63 63 .500 4	ORG O O O O
+PITTSBURGH 55 73 .430 13	ORG O O O O
+WESTERN DIVISION	MISC MISC
+SATURDAY , AUGUST 24TH SCHEDULE	O O O O O
+CHICAGO AT ATLANTA	ORG O LOC
+ST LOUIS AT HOUSTON	ORG ORG O LOC
+NEW YORK AT LOS ANGELES	ORG ORG O LOC LOC
+MONTREAL AT SAN FRANCISCO	ORG O LOC LOC
+CINCINNATI AT FLORIDA	ORG O LOC
+PITTSBURGH AT COLORADO	ORG O LOC
+PHILADELPHIA AT SAN DIEGO	ORG O LOC LOC
+NEW YORK 1996-08-24	LOC LOC O
+Results of Major League	O O MISC MISC
+American League	MISC MISC
+BOSTON 6 Seattle 4	ORG O ORG O
+California 2 BALTIMORE 0	ORG O ORG O
+NEW YORK 5 Oakland 3	ORG ORG O ORG O
+Toronto 4 CHICAGO 2	ORG O ORG O
+Detroit 3 KANSAS CITY 2	ORG O ORG ORG O
+MINNESOTA 9 Texas 2	ORG O ORG O
+National League	MISC MISC
+ATLANTA 4 Chicago 3	ORG O ORG O
+St Louis 1 HOUSTON 0	ORG ORG O ORG O
+Pittsburgh 5 COLORADO 3	ORG O ORG O
+Philadelphia 7 SAN DIEGO 4	ORG O ORG ORG O
+Montreal 10 SAN FRANCISCO 8	ORG O ORG ORG O
+LISBON 1996-08-24	LOC O
+Result of a Portuguese first	O O O MISC O
+Belenenses 2 Boavista 4	ORG O ORG O
+AMSTERDAM 1996-08-24	LOC O
+BRUSSELS 1996-08-24	LOC O
+Results of Belgian first	O O MISC O
+division matches on Saturday :	O O O O O
+Standard Liege 3 Molenbeek 0	ORG ORG O ORG O
+Anderlecht 2 Lokeren 2	ORG O ORG O
+Cercle Brugge 2 Mouscron 2	ORG ORG O ORG O
+Antwerp 1 Lommel 4	ORG O ORG O
+Ghent 3 Aalst 2	ORG O ORG O
+Lierse 4 Charleroi 0	ORG O ORG O
+Sint Truiden 3 Ekeren 1	ORG ORG O ORG O
+PARIS 1996-08-24	LOC O
+Leading goalscorers in the French	O O O O MISC
+PARIS 1996-08-24	LOC O
+Summaries of French first division	O O MISC O O
+matches on Saturday :	O O O O
+Halftime 0-0 .	O O O
+Attendance 16,000 .	O O O
+1-0 .	O O
+6,000 .	O O
+( Guivarc'h 60th pen .	O PER O O O
+) 0-0 .	O O O
+6,000 .	O O
+Bordeaux 0 Auxerre 0 .	ORG O ORG O O
+30,000 .	O O
+69th ) .	O O O
+1-0 .	O O
+20,000 .	O O
+0-0 .	O O
+15,000	O
+0-0 .	O O
+9,000 .	O O
+2-1 .	O O
+7,000 .	O O
+0-1 .	O O
+10,000 .	O O
+Played on Friday :	O O O O
+15,000 .	O O
+PARIS 1996-08-24	LOC O
+Standings in the French soccer	O O O MISC O
+PARIS 1996-08-24	LOC O
+Results of French first division	O O MISC O O
+matches on Saturday :	O O O O
+Nantes 0 Lens 1	ORG O ORG O
+Nice 1 Bastia 1	ORG O ORG O
+Lille 3 Rennes 1	ORG O ORG O
+Bordeaux 0 Auxerre 0	ORG O ORG O
+Marseille 1 Metz 2	ORG O ORG O
+Strasbourg 1 Le Havre 0	ORG O ORG ORG O
+Caen 1 Lyon 1	ORG O ORG O
+Guingamp 2 Monaco 1	ORG O ORG O
+Montpellier 0 Cannes 1	ORG O ORG O
+Played on Friday :	O O O O
+AMSTERDAM 1996-08-24	LOC O
+Result of Dutch first division	O O MISC O O
+Heerenveen 2 Ajax Amsterdam 0	ORG O ORG ORG O
+BONN 1996-08-24	LOC O
+Summaries of German first division	O O MISC O O
+matches played on Saturday :	O O O O O
+Halftime 0-0 .	O O O
+Attendance 25,000	O O
+1-2 .	O O
+20,000	O
+68th ) .	O O O
+0-0 .	O O
+32,000	O
+1-0 .	O O
+50,000	O
+0-0 .	O O
+18,000	O
+86th , 90th ) .	O O O O O
+0-1 .	O O
+22,500	O
+BONN 1996-08-24	LOC O
+Results of German first division	O O MISC O O
+Bochum 1 Arminia Bielefeld 1	ORG O ORG ORG O
+Borussia Moenchengladbach 1 Karlsruhe 3	ORG ORG O ORG O
+Stuttgart 2 Werder Bremen 1	ORG O ORG ORG O
+Freiburg 1 Cologne 3	ORG O ORG O
+Played on Saturday :	O O O O
+St Pauli 4 Schalke 4	ORG ORG O ORG O
+Hansa Rostock 0 Hamburg 1	ORG ORG O ORG O
+VIENNA 1996-08-24	LOC O
+Results of Austria first division	O O LOC O O
+GAK 2 Austria Vienna 2	ORG O ORG ORG O
+COLOMBO 1996-08-24	LOC O
+LONDON 1996-08-24	LOC O
+LONDON 1996-08-24	LOC O
+Salim Malik not out 2	PER PER O O O
+Asif Mujtaba not out 1	PER PER O O O
+Extras 18	O O
+England 326 all out	LOC O O O
+TRIPOLI , Lebanon 1996-08-24	LOC O LOC O
+Attendance : 10,000 .	O O O O
+PEMBERTON , British Columbia 1996-08-24	LOC O LOC LOC O
+LAGOS 1996-05-28	LOC O
+BLANTYRE 1996-08-24	LOC O
+Emelia Sithole	PER PER
+HARARE 1996-08-24	LOC O
+KIGALI 1996-08-24	LOC O
+JOHANNESBURG 1996-08-24	LOC O
+KHARTOUM 1996-08-24	LOC O
+TIRANA 1996-08-24	LOC O
+MANAGUA , Nicaragua 1996-08-23	LOC O LOC O
+BEIJING 1996-08-24	LOC O
+It gave no details .	O O O O O
+TEHRAN 1996-08-24	LOC O
+TUNIS 1996-08-24	LOC O
+NICOSIA 1996-08-24	LOC O
+NICOSIA 1996-08-24	LOC O
+BAGHDAD 1996-08-24	LOC O
+JUMHOURIYA	ORG
+QADISSIYA	ORG
+IRAQ	LOC
+BABEL	ORG
+Laurence McQuillan	PER PER
+WASHINGTON 1996-08-24	LOC O
+MIAMI 1996-08-24	LOC O
+PARIS 1996-08-24	LOC O
+BONN 1996-08-24	LOC O
+ORVIETO , Italy 1996-08-24	LOC O LOC O
+VERONA , Italy 1996-08-24	LOC O LOC O
+Jeremy Lovell	PER PER
+BRUSSELS 1996-08-24	LOC O
+PARIS 1996-08-24	LOC O
+VALLETTA 1996-08-24	LOC O
+VIENNA 1996-08-24	LOC O
+MADRID 1996-08-24	LOC O
+ISLAMABAD 1996-08-24	LOC O
+MOUNTAIN VIEW , Calif. 1996-08-25	LOC LOC O LOC O
+AKRON , Ohio 1996-08-25	LOC O LOC O
+AKRON , Ohio 1996-08-24	LOC O LOC O
+Scores after the final	O O O O
+67 69	O O
+70 71 74	O O O
+71 73	O O
+69 74	O O
+74 74	O O
+COMMACK , New York 1996-08-24	LOC O LOC LOC O
+Results at the Hamlet	O O O O
+seedings :	O O
+Finals , singles	O O O
