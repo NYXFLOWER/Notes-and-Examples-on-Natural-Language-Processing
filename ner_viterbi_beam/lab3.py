@@ -37,8 +37,8 @@ def load_dataset_sents(file_path, as_zip=True, to_idx=False, token_vocab=None, t
             zip_inps.append(list(zip(words, ner_tags)))
     return zip_inps if as_zip else (inputs, targets)
 
-train_data = load_dataset_sents(sys.argv[1])
-test_data = load_dataset_sents(sys.argv[2])
+train_data = load_dataset_sents("train.txt")
+test_data = load_dataset_sents("test.txt")
 
 ## unique tags
 all_tags = ["O", "PER", "LOC", "ORG", "MISC"]
