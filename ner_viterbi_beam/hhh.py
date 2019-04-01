@@ -1,5 +1,4 @@
 import operator
-import os
 from collections import Counter
 import sys
 import itertools
@@ -8,6 +7,7 @@ import time
 import random
 from sklearn.metrics import f1_score
 import collections
+from itertools import chain
 
 
 def load_dataset_sents(file_path, as_zip=True, to_idx=False, token_vocab=None, target_vocab=None):
@@ -116,36 +116,31 @@ class Perceptron:
         # unzip them
         sentence, _ = list(zip(*doc))
 
-        beam_list = [([], 0)]
-        for w in sentence:
-            b_ = []
-            for beam in beam_list:
-                for l in self.all_tags:
-                    b_.append((beam[0] + [l], weight[(w, l)] + beam[1]))
-            beam_list = sorted(b_, key=lambda i: i[1], reverse=True)[:size]
+        # start of sentence
+        word = sentence[0]
+        feat = list(zip([word] * len(self.all_tags), self.all_tags))
+        w = np.array([weight[f] if f in weight else 0 for f in feat])
+        beam = collections.OrderedDict(iter([(self.all_tags[l], w[l]) for l in w.argsort()[-size:]]))
+        # sentence body
+        for i in range(len(sentence))[1:]:
+            beam_temp = collections.OrderedDict()
+            for b in beam:
+                feat = list(zip([sentence[i]] * len(self.all_tags), self.all_tags))
+                w = np.array([weight[f] if f in weight else 0 for f in feat]) + beam[b]
+                ll = [self.tuple_append(b, label) for label in self.all_tags]
+                beam_temp.update(collections.OrderedDict(zip(ll, w)))
+            # top 3
+            iterms = list(beam_temp.items())
+            np.random.shuffle(iterms)
+            [ind, score] = zip(*iterms)
+            # score = list(beam_temp.values())
+            # ind = list(beam_temp.keys())
+            beam = collections.OrderedDict(iter([(ind[l], score[l]) for l in np.argsort(score)[-size:]]))
 
-        labels = max(beam_list, key=lambda i: i[1])[0]
+        # return predicted label sequence
+        labels = max(beam.items(), key=operator.itemgetter(1))[0]
+
         return list(zip(sentence, labels))
-
-        # # start of sentence
-        # word = sentence[0]
-        # feat = list(zip([word] * len(self.all_tags), self.all_tags))
-        # w = np.array([weight[f] if f in weight else 0 for f in feat])
-        # beam = collections.OrderedDict(iter([(self.all_tags[l], w[l]) for l in w.argsort()[-size:]]))
-        # # sentence body
-        # for i in range(len(sentence))[1:]:
-        #     beam_temp = collections.OrderedDict()
-        #     feat = list(zip([sentence[i]] * len(self.all_tags), self.all_tags))
-        #     for b in beam:
-        #         w = np.array([weight[f] if f in weight else 0 for f in feat]) + beam[b]
-        #         ll = [self.tuple_append(b, label) for label in self.all_tags]
-        #         beam_temp.update(collections.OrderedDict(zip(ll, w)))
-        #     # top 3
-        #     beam = dict(iter(list(beam_temp.items())[-size:]))
-        # # return predicted label sequence
-        # labels = max(beam.items(), key=operator.itemgetter(1))[0]
-
-        # return list(zip(sentence, labels))
 
     @staticmethod
     def tuple_append(beam_key, label):
@@ -157,6 +152,7 @@ class Perceptron:
     def train_perceptron(self, data, epochs, shuffle=True, size=0):
         # variables used as metrics for performance and accuracy
         iterations = range(len(data) * epochs)
+
         false_prediction = 0
         false_predictions = []
         # initialising our weights dictionary as a counter
@@ -191,13 +187,13 @@ class Perceptron:
             print("Epoch: ", epoch + 1, " / Time for epoch: ", round(time.time() - now, 2),
               " / No. of false predictions: ", false)
 
-            print("Evaluating the perceptron with (cur_word, cur_tag)")
-            correct_tags, predicted_tags = perceptron.test_perceptron(test_data, weights, size)
+            print("Evaluating the perceptron with (cur_word, cur_tag) \n")
+            correct_tags, predicted_tags = perceptron.test_perceptron(test_data, weights)
             perceptron.evaluate(correct_tags, predicted_tags)
         return weights, false_predictions, iterations
 
     # testing the learned weights
-    def test_perceptron(self, data, weights, size=1):
+    def test_perceptron(self, data, weights, size=0):
         correct_tags = []
         predicted_tags = []
         for doc in data:
@@ -212,11 +208,12 @@ class Perceptron:
     def evaluate(self, correct_tags, predicted_tags):
         f1_tags = ["PER", "LOC", "ORG", "MISC"]
         f1 = f1_score(correct_tags, predicted_tags, average='micro', labels=f1_tags)
-        print("F1 Score: ", round(f1, 5), "\n")
+        print("F1 Score: ", round(f1, 5))
         return f1
 
 
 if __name__ == "__main__":
+    random.seed(11242)
     depochs = 8
     feat_red = 0
     print("Default no. of epochs: ", depochs)
@@ -224,14 +221,8 @@ if __name__ == "__main__":
     print("Loading the data \n")
 
     """ ----------------- Loading the data -----------------"""
-    abs_path = os.path.abspath('.')
-    mod = 1
-    if sys.argv[1] == "-v":
-        mod = 2
-    elif sys.argv[1] == "-b":
-        mod = 3
-    train_data = load_dataset_sents(os.path.join(abs_path, sys.argv[2]))
-    test_data = load_dataset_sents(os.path.join(abs_path, sys.argv[3]))
+    train_data = load_dataset_sents("train.txt")
+    test_data = load_dataset_sents("test.txt")
 
     # unique tags
     all_tags = ["O", "PER", "LOC", "ORG", "MISC"]
@@ -240,24 +231,9 @@ if __name__ == "__main__":
     print("Defining the feature space \n")
     cw_ct_count = cw_ct_counts(train_data, freq_thresh=feat_red)
 
-    perceptron = Perceptron(all_tags, cw_ct_count, mod)
+    perceptron = Perceptron(all_tags, cw_ct_count, mod=1)
     print("Training the perceptron with (cur_word, cur_tag) \n")
-    if mod == 3:
-        print(" -------------------- beam search with size 1 -------------------- ")
-        random.seed(11242)
-        perceptron.train_perceptron(train_data.copy(), epochs=depochs, size=1)
-
-        print("\n -------------------- beam search with size 3 -------------------- ")
-        random.seed(11242)
-        perceptron.train_perceptron(train_data.copy(), epochs=depochs, size=3)
-
-        print("\n -------------------- beam search with size 500 -------------------- ")
-        random.seed(11242)
-        perceptron.train_perceptron(train_data.copy(), epochs=depochs, size=500)
-
-    else:
-        perceptron.train_perceptron(train_data.copy(), epochs=depochs, size=1)
-
+    weights, false_predictions, iterations = perceptron.train_perceptron(train_data, epochs=depochs, size=5000)
 
     # print("Evaluating the perceptron with (cur_word, cur_tag) \n")
     # correct_tags, predicted_tags = perceptron.test_perceptron(test_data, weights)
