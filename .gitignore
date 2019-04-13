@@ -116,4 +116,7 @@ dmypy.json
 # for me
 .idea/
 */.DS_Store
-/
+*/*/.DS_Store
+lm-pytorch/report/
+.DS_Store
+.vscode/
