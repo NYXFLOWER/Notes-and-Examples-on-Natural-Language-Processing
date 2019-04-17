@@ -11,7 +11,6 @@ from collections import OrderedDict
 
 
 torch.manual_seed(1)
-
 ######################################################################
 
 # word_to_ix = {"hello": 0, "world": 1}
@@ -37,9 +36,11 @@ torch.manual_seed(1)
 # In this example, we will compute the loss function on some training
 # examples and update the parameters with backpropagation.
 #
-
+print("^^^^^^^^^^^^^^^^^^^^^^^^^ Setting ^^^^^^^^^^^^^^^^^^^^^^^^^^")
 CONTEXT_SIZE = 2
 EMBEDDING_DIM = 10
+print("{:15s}: {:5d}".format("Context size", CONTEXT_SIZE))
+print("{:15s}: {:5d}".format("Embedding dim", EMBEDDING_DIM))
 
 # ----------- process data ----------
 toy_dataset = ["The mathematician ran",
@@ -55,19 +56,10 @@ for sen in toy_dataset:
     vocab.update(tokens)
     trigrams += [([tokens[i], tokens[i+1]], tokens[i+2]) for i in range(len(tokens)-2)]
 vocab = list(vocab)
+vocab.sort()
+
 word_to_ix = OrderedDict({word: i for i, word in enumerate(vocab)})
 ix_to_word = list(word_to_ix.keys())
-
-
-
-
-test_san = ["<s>"] + "The mathematician ran to the store".split(" ") + ["</s>"]
-trig_san = [([test_san[i], test_san[i + 1]], test_san[i + 2]) for i in range(len(test_san) - 2)]
-def fill_sent(gap):
-    return [(["<s>", "The"], gap), (["The", gap], "solved"), ([gap, "solved"], "the")]
-candi = ["physicist", "philosopher"]
-
-
 
 
 class NGramLanguageModeler(nn.Module):
@@ -112,8 +104,11 @@ def pred_token(log_prob_tensor):
 
 # hyper-parameter setting
 learning_rate = 0.05
-epoch_num = 1000
+epoch_num = 61
 
+print("{:15s}: {:5.2f}".format("Learning rate", learning_rate))
+print("{:15s}: {:5d}".format("epoch number", epoch_num))
+print()
 
 loss_function = nn.NLLLoss()
 model = NGramLanguageModeler(len(vocab), EMBEDDING_DIM, CONTEXT_SIZE)
@@ -143,29 +138,28 @@ for epoch in range(epoch_num):
 
         total_loss += loss.data
     losses.append(total_loss)
-
-
-
+#
+#
+#
+#     # ---------------------- Sanity check ---------------------
+#     pred_binary = []
+#     for x, y in trig_san:
+#         probs_tensor = compute_log_probs(x)
+#         y_pred = pred_token(probs_tensor)
+#         if y_pred == y:
+#             pred_binary.append(1)
+#     correct_san.append(sum(pred_binary))
     # ---------------------- Sanity check ---------------------
-    pred_binary = []
-    for x, y in trig_san:
-        probs_tensor = compute_log_probs(x)
-        y_pred = pred_token(probs_tensor)
-        if y_pred == y:
-            pred_binary.append(1)
-    correct_san.append(sum(pred_binary))
-    # ---------------------- Sanity check ---------------------
-    probs = [0, 0]
-    for i in [0, 1]:
-        for x, y in fill_sent(candi[i]):
-            probs_tensor = compute_log_probs(x)
-            probs[i] += probs_tensor[0, word_to_ix[y]].data
-    boolean_test.append(probs[0] > probs[1])
-
-print("loss", losses[0], losses[-1])  # The loss decreased every iteration over the training data!
-
-print("max correct number {:d} at {:d}".format(max(correct_san), np.argmax(correct_san)))
-
+    # probs = [0, 0]
+    # for i in [0, 1]:
+    #     for x, y in fill_sent(candi[i]):
+    #         probs_tensor = compute_log_probs(x)
+    #         probs[i] += probs_tensor[0, word_to_ix[y]].data
+    # boolean_test.append(probs[0] > probs[1])
+#
+# print("loss", losses[0], losses[-1])  # The loss decreased every iteration over the training data!
+#
+# print("max correct number {:d} at {:d}".format(max(correct_san), np.argmax(correct_san)))
 
 # ----------------------- test data -----------------------
 
@@ -174,36 +168,58 @@ print("max correct number {:d} at {:d}".format(max(correct_san), np.argmax(corre
 # ---------------------------------------------------------
 # ---------------------- Sanity check ---------------------
 # ---------------------------------------------------------
-# # data
-# test_san = ["<s>"] + "The mathematician ran to the store".split(" ") + ["</s>"]
-# trig_san = [([test_san[i], test_san[i + 1]], test_san[i + 2]) for i in range(len(test_san) - 2)]
-#
-# # test
-# pred_binary = []
-# for x, y in trig_san:
-#     probs_tensor = compute_log_probs(x)
-#     y_pred = pred_token(probs_tensor)
-#     if y_pred == y:
-#         pred_binary.append(1)
-# # pred_binary = [1 if pred_token(compute_log_probs(x)) == y else 0 for x, y in trig_san]
-# print(pred_binary)
-#
-#
+print("^^^^^^^^^^^^^^^^^^^^^^^^^ Sanity Check ^^^^^^^^^^^^^^^^^^^^^^^^^^")
+# data
+test_san = ["<s>"] + "The mathematician ran to the store".split(" ") + ["</s>"]
+trig_san = [([test_san[i], test_san[i + 1]], test_san[i + 2]) for i in range(len(test_san) - 2)]
+
+line = "|---------------------------------------------------------------|"
+form = "|{:15s}|{:15s}|{:15s}|{:15}|"
+print(line)
+print("|{:31s}|{:15s}|{:15}|".format("Input Word", "Predict Word", "Is Correct"))
+print(line)
+
+for x, y in trig_san:
+    probs_tensor = compute_log_probs(x)
+    y_pred = pred_token(probs_tensor)
+    if y_pred == y:
+        print(form.format(x[0], x[1], y_pred, "Yes"))
+print(line)
+print()
+
 # # ---------------------------------------------------------
 # # -------------------------- Test -------------------------
 # # ---------------------------------------------------------
-# # data
-# def fill_sent(gap):
-#     return [(["<s>", "The"], gap), (["The", gap], "solved"), ([gap, "solved"], "the")]
-#
-#
-# candi = ["physicist", "philosopher"]
-#
-# # comput log prob for physicist and philosopher
-# probs = [0, 0]
-# for i in [0, 1]:
-#     for x, y in fill_sent(candi[i]):
-#         probs_tensor = compute_log_probs(x)
-#         probs[i] += probs_tensor[0, word_to_ix[y]].data
-#
-# print(probs)
+# data
+def fill_sent(gap):
+    return [(["<s>", "The"], gap), (["The", gap], "solved"), ([gap, "solved"], "the")]
+
+
+candi = ["physicist", "philosopher"]
+form = "-> {:13s} is: {:6.2f}"
+
+print("^^^^^^^^^^^^^^^^^^^^^^^^^ Test ^^^^^^^^^^^^^^^^^^^^^^^^^^")
+
+# comput log prob for physicist and philosopher
+probs = [0, 0]
+for i in [0, 1]:
+    for x, y in fill_sent(candi[i]):
+        probs_tensor = compute_log_probs(x)
+        probs[i] += probs_tensor[0, word_to_ix[y]].data
+print("The log prob of sentence with")
+print(form.format('\'physicist\'', probs[0]))
+print(form.format('\'philosopher\'', probs[1]))
+
+choose = 0 if probs[0] > probs[1] else 1
+print("Choose \'{:9s}\' fill the gap.".format(candi[choose]))
+print()
+
+lookup_tensor = [torch.LongTensor([word_to_ix[i]]) for i in candi+["mathematician"]]
+embed = [model.embeddings(autograd.Variable(i)) for i in lookup_tensor]
+
+print("The cosine similarity between 'mathematician' and")
+cos = [F.cosine_similarity(embed[i], embed[2])[0] for i in [0, 1]]
+print(form.format('\'physicist\'', cos[0]))
+print(form.format('\'philosopher\'', cos[1]))
+choose = 0 if cos[0] > cos[1] else 1
+print("Choose \'{:9s}\' fill the gap.".format(candi[choose]))
