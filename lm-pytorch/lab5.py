@@ -77,6 +77,7 @@ class NGramLanguageModeler(nn.Module):
         log_probs = F.log_softmax(out, dim=1)
         return log_probs
 
+
 def compute_log_probs(con):
     # Step 1. Prepare the inputs to be passed to the model (i.e, turn the words
     # into integer indices and wrap them in variables)
