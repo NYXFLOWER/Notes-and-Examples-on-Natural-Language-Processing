@@ -1,0 +1,120 @@
+\documentclass[journal, a4paper]{IEEEtran}
+
+% some very useful LaTeX packages include:
+
+\usepackage{graphicx}   
+\usepackage{url}        
+%\usepackage{stfloats}  
+\usepackage{amsmath}    
+
+% Your document starts here!
+\begin{document}
+
+% Define document title and author
+	\title{Huffman Code Text Compression and Decompression}
+	\author{Hao Xu}
+%	\thanks{Advisor:}
+%	\markboth{Hauptseminar Digitale Kommunikationssysteme}{}
+	\maketitle
+
+
+% Each section begins with a \section{title} command
+\section{Introduction}
+	% \PARstart{}{} creates a tall first letter for this first paragraph
+	Huffman coding is a simple but lossless algorithm for data compression. In this report, a model for encoding Huffman code has been developed. After describing the implementation and presenting the result, compression performances based on both character-based and word-based Huffman has been compared and evaluated.
+
+% Main Part
+\section{Model}
+    \subsection{Encoding}
+        Formally, in an encoding task we have a set of symbols called alphabet $A=\{a_1, a_2, ..., a_n\}$ and their corresponding weight $W=\{w_1, w_2, ..., w_n\}s.t.\ \sum_i w_i=1$. A \textbf{code} $C$ is a binary-string valued function over $A$, usually its image $C(A)$ is call the set of code words. What we want to look for is a code $C$ that minimizes the quantity: 
+        $$L(C)=\sum_{i=1}^n w_i \times \text{length}(C(a_i))$$
+        From information theory we can prove that for all possible code function, $L$ is lower bounded by the entropy of $W$: 
+        $$L(C)\geq H(W)=-\sum_i w_i \log w_i \ \ \forall C$$
+    
+    \subsection{Huffman code}
+        The Huffman code is one of the optimal prefix-free codes. A code $C$ is \textbf{prefix-free} if no code word is a prefix of any other code word in $C(A)$. 
+        In this report I consider two specific implementation of Huffman code for text compression:
+        \begin{itemize}
+            \item \textit{Char based}: Treat any character as symbol
+            \item \textit{Word based}: Treat word and only non-letter character as  symbol
+        \end{itemize}
+        For both cases the weight for each symbol is its frequency in the text.
+
+
+\section{Implementation}
+    \noindent Packages used: argparse, re, array, bisect, pickle, os, collections
+    \subsection{Build Huffman tree \& code dictionary}
+    \begin{itemize}
+        \item For \textit{char} mode, \textit{re.split} function was used to split text into a list of words and special characters
+        \item Use \textit{collections.Counter} function to count the distinct elements in that list (or in the text directly in\ \textit{word} mode), which outputs a dictionary with entries: 'symbol: number of occurrence'
+        \item Declare a \textit{Node} class, construct a \textit{node} object for each entry in the dictionary and them into a list
+        \item Sort the list in ascending order of node's weight (number of occurrence of corresponding symbol)
+        \item Pop the first two nodes in the list and construct a new one from them. New nodes weight is the sum of the two's weight. Repeat the step until there is only one node left, this node is the root of Huffman tree
+        \item Do the tree traversal, build the code dictionary from leaves with each dictionary entry: 'symbol on this leave: binary-string representing the path from root to this leaf'
+    \end{itemize}
+    \subsection{Encoding (Compression)}
+        \begin{itemize}
+            \item For each symbol (a character in \textit{char} mode or a word/non-letter character in \textit{word}) mode) in the text, get it code word by referring to the code dictionary.
+            \item Concatenate all code words into a single binary string. This string is the encoded text.
+        \end{itemize}
+        
+    \subsection{Decoding (Decompression)}
+        \begin{itemize}
+            \item Define a pointer of node \textit{p} which initially points at the root of the Huffman code tree.
+            \item Scan the encoded text bit by bit, point \textit{p} to its left child if the bit is '0', otherwise point \textit{p} to its right child. Whenever \textit{p} is pointing at a leaf, append the symbol represented by this leaf to a list.
+            \item Concatenate all symbols in the list, this string is the decoded text and should be same as the original one.
+        \end{itemize}
+
+\section{Result}
+	The Project Gutenberg version of Melville’s novel `mobydick.txt` is supplied as a data file for development and testing. The size of this file is $1220.15$KB.
+	\begin{table}[!hbt]
+		% Center the table
+		\begin{center}
+		% Title of the table
+		%\caption{Experiment result}
+		%\label{tab:simParameters}
+
+		\begin{tabular}{|c|c|c|}
+			\hline
+
+			 & 'char' & 'word' \\
+			\hline
+			Compressed file size Mode&675KB &383KB \\
+			\hline
+			Symbol model size &6KB &1433KB \\
+			\hline
+			Model building time &0.0056s &0.394s\\
+			\hline
+			Encoding time &1.072s &0.892s\\
+			\hline
+			Decoding time &3.105s &1.914s\\
+			\hline
+		\end{tabular}
+		\end{center}
+	\end{table}
+
+\section{Discussion}
+    In the 'char' mode, the model size is pretty small (6KB) and building model is quick (0.005s), but the compressed file is not that small (675KB), and decoding time is relatively long (3s).
+    
+    In the 'word' mode, model size is large (1.4MB) and it takes a relatively long time to build the model (0.4s), but the compressed file is smaller (383KB), also the decoding time is shorter.
+    
+    The encoding time is not significantly different between two modes.
+    
+    Regarding the time of compression and decompression, changing to another language, like C++, will probably reduce the executing time of all parts. Also, due to the clumsiness of Python class , the model size will be smaller in C++.
+    
+    Regarding the compression rate, we can only do better by changing to other algorithms. Taking the correlation between adjacent word into consideration might further increase the compression rate. For example, n-gram models.
+
+
+% Now we need a bibliography:
+\begin{thebibliography}{5}
+
+	\bibitem{MJH06} % Conference paper
+	Huffman D A. A method for the construction of minimum-redundancy codes[J]. Proceedings of the IRE, 1952, 40(9): 1098-1101.
+
+	\bibitem{Proakis} % Book
+    Cover T M, Thomas J A. Elements of information theory[M]. John Wiley \& Sons, 2012.
+
+\end{thebibliography}
+
+% Your document ends here!
+\end{document}

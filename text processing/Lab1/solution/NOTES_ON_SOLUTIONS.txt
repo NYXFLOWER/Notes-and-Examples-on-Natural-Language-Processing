@@ -1,0 +1,11 @@
+This lab task is sufficiently complicated for us to raise the issue of
+how code might be structured/organised.
+
+It's possible to handle this problem with code that could be described
+as a "flat script". The file soln_WO_SCRIPT.py is an example of this
+type of solution.
+
+An alternative, however, is to use Python's (quite liberal) OOP
+facilities to group functionality into more conceptually manageable
+blocks as classes. A solution of this kind is available in the file
+soln_WO_CLASSES.py

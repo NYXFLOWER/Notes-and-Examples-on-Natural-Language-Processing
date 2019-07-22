@@ -1,0 +1,278 @@
+Last login: Sat Nov 10 10:48:03 on ttys000
+Haos-MacBook-Pro:~ nyxfer$ cd Documents/GitHub/Text-Processing/IR/
+Haos-MacBook-Pro:IR nyxfer$ python ir_engine.py -w binary -o b.txt
+ir_engine.py:90: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  self.startTime[label] = time.clock()
+ir_engine.py:93: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  duration = time.clock() - self.startTime[label]
+TIME (retrieval): 0.13
+Haos-MacBook-Pro:IR nyxfer$ python ir_engine.py -s -w b -o b_s.txt
+*** ERROR: term weighting label (opt: -w LABEL)! ***
+    -- value (b) not recognised!
+    -- must be one of: binary / tf / tfidf
+------------------------------------------------------------
+USE: python ir_engine.py (options)
+OPTIONS:
+    -h : print this help message
+    -s : use "with stoplist" configuration (default: without)
+    -p : use "with stemming" configuration (default: without)
+    -w LABEL : use weighting scheme "LABEL" (LABEL in {binary, tf, tfidf}, default: binary)
+    -o FILE : output results to file FILE
+------------------------------------------------------------
+Haos-MacBook-Pro:IR nyxfer$ python ir_engine.py -s -w binary -o b_s.txt
+ir_engine.py:90: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  self.startTime[label] = time.clock()
+ir_engine.py:93: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  duration = time.clock() - self.startTime[label]
+TIME (retrieval): 0.20
+Haos-MacBook-Pro:IR nyxfer$ python ir_engine.py -s -p -w binary -o b_s_p.txt
+ir_engine.py:90: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  self.startTime[label] = time.clock()
+ir_engine.py:93: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  duration = time.clock() - self.startTime[label]
+TIME (retrieval): 0.29
+Haos-MacBook-Pro:IR nyxfer$ python ir_engine.py -p -w binary -o b_p.txt
+ir_engine.py:90: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  self.startTime[label] = time.clock()
+ir_engine.py:93: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  duration = time.clock() - self.startTime[label]
+TIME (retrieval): 0.33
+Haos-MacBook-Pro:IR nyxfer$ python ir_engine.py -p -w tf -o tf_p.txt
+ir_engine.py:90: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  self.startTime[label] = time.clock()
+ir_engine.py:93: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  duration = time.clock() - self.startTime[label]
+TIME (retrieval): 0.33
+Haos-MacBook-Pro:IR nyxfer$ python ir_engine.py -s -w tf -o tf_s.txt
+ir_engine.py:90: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  self.startTime[label] = time.clock()
+ir_engine.py:93: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  duration = time.clock() - self.startTime[label]
+TIME (retrieval): 0.17
+Haos-MacBook-Pro:IR nyxfer$ python ir_engine.py -s -p -w tf -o tf_s_p.txt
+ir_engine.py:90: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  self.startTime[label] = time.clock()
+ir_engine.py:93: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  duration = time.clock() - self.startTime[label]
+TIME (retrieval): 0.29
+Haos-MacBook-Pro:IR nyxfer$ python ir_engine.py -s -p -w tfidf -o tfidf_s_p.txt
+ir_engine.py:90: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  self.startTime[label] = time.clock()
+/Users/nyxfer/Documents/GitHub/Text-Processing/IR/my_retriever.py:93: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  idf_query = self.idfs[index_word.tolist()]
+ir_engine.py:93: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  duration = time.clock() - self.startTime[label]
+TIME (retrieval): 0.29
+Haos-MacBook-Pro:IR nyxfer$ python ir_engine.py -s -w tfidf -o tfidf_s.txt
+ir_engine.py:90: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  self.startTime[label] = time.clock()
+/Users/nyxfer/Documents/GitHub/Text-Processing/IR/my_retriever.py:93: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  idf_query = self.idfs[index_word.tolist()]
+ir_engine.py:93: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  duration = time.clock() - self.startTime[label]
+TIME (retrieval): 0.19
+Haos-MacBook-Pro:IR nyxfer$ python ir_engine.py -s -p tfidf -o tfidf_p.txt
+*** ERROR: no arg files - only options! ***
+------------------------------------------------------------
+USE: python ir_engine.py (options)
+OPTIONS:
+    -h : print this help message
+    -s : use "with stoplist" configuration (default: without)
+    -p : use "with stemming" configuration (default: without)
+    -w LABEL : use weighting scheme "LABEL" (LABEL in {binary, tf, tfidf}, default: binary)
+    -o FILE : output results to file FILE
+------------------------------------------------------------
+Haos-MacBook-Pro:IR nyxfer$ python ir_engine.py -p -w tfidf -o tfidf_p.txt
+ir_engine.py:90: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  self.startTime[label] = time.clock()
+/Users/nyxfer/Documents/GitHub/Text-Processing/IR/my_retriever.py:93: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  idf_query = self.idfs[index_word.tolist()]
+ir_engine.py:93: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  duration = time.clock() - self.startTime[label]
+TIME (retrieval): 0.33
+Haos-MacBook-Pro:IR nyxfer$ python ir_engine.py -w tfidf -o tfidf.txt
+ir_engine.py:90: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  self.startTime[label] = time.clock()
+/Users/nyxfer/Documents/GitHub/Text-Processing/IR/my_retriever.py:93: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  idf_query = self.idfs[index_word.tolist()]
+ir_engine.py:93: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  duration = time.clock() - self.startTime[label]
+TIME (retrieval): 0.20
+Haos-MacBook-Pro:IR nyxfer$ python eval_ir.py cacm_gold_std.txt b
+b.txt       b_p.txt     b_s.txt     b_s_p.txt   bbb.txt     binary.txt
+Haos-MacBook-Pro:IR nyxfer$ python eval_ir.py cacm_gold_std.txt b.txt 
+-------------------------------------------
+Total number of queries: 64
+Total number of documents over all queries:
+    Retrieved:        640
+    Relevant:         796
+    Rel_Retr:          44
+Prec/Rec/F across all queries:
+    Precision:       0.07
+    Recall:          0.06
+    F-measure:       0.06
+
+Haos-MacBook-Pro:IR nyxfer$ python eval_ir.py cacm_gold_std.txt b_s
+b_s.txt    b_s_p.txt  
+Haos-MacBook-Pro:IR nyxfer$ python eval_ir.py cacm_gold_std.txt b_s.txt 
+-------------------------------------------
+Total number of queries: 64
+Total number of documents over all queries:
+    Retrieved:        640
+    Relevant:         796
+    Rel_Retr:          82
+Prec/Rec/F across all queries:
+    Precision:       0.13
+    Recall:          0.10
+    F-measure:       0.11
+
+Haos-MacBook-Pro:IR nyxfer$ python eval_ir.py cacm_gold_std.txt b_s_p.txt 
+-------------------------------------------
+Total number of queries: 64
+Total number of documents over all queries:
+    Retrieved:        640
+    Relevant:         796
+    Rel_Retr:         105
+Prec/Rec/F across all queries:
+    Precision:       0.16
+    Recall:          0.13
+    F-measure:       0.15
+
+Haos-MacBook-Pro:IR nyxfer$ python eval_ir.py cacm_gold_std.txt b_p.txt 
+-------------------------------------------
+Total number of queries: 64
+Total number of documents over all queries:
+    Retrieved:        640
+    Relevant:         796
+    Rel_Retr:          58
+Prec/Rec/F across all queries:
+    Precision:       0.09
+    Recall:          0.07
+    F-measure:       0.08
+
+Haos-MacBook-Pro:IR nyxfer$ python eval_ir.py cacm_gold_std.txt tf.txt 
+-------------------------------------------
+Total number of queries: 64
+Total number of documents over all queries:
+    Retrieved:        640
+    Relevant:         796
+    Rel_Retr:         123
+Prec/Rec/F across all queries:
+    Precision:       0.19
+    Recall:          0.15
+    F-measure:       0.17
+
+Haos-MacBook-Pro:IR nyxfer$ python eval_ir.py cacm_gold_std.txt tf_s.txt 
+-------------------------------------------
+Total number of queries: 64
+Total number of documents over all queries:
+    Retrieved:        640
+    Relevant:         796
+    Rel_Retr:         107
+Prec/Rec/F across all queries:
+    Precision:       0.17
+    Recall:          0.13
+    F-measure:       0.15
+
+Haos-MacBook-Pro:IR nyxfer$ python eval_ir.py cacm_gold_std.txt tf_s_p.txt 
+-------------------------------------------
+Total number of queries: 64
+Total number of documents over all queries:
+    Retrieved:        640
+    Relevant:         796
+    Rel_Retr:         123
+Prec/Rec/F across all queries:
+    Precision:       0.19
+    Recall:          0.15
+    F-measure:       0.17
+
+Haos-MacBook-Pro:IR nyxfer$ python ir_engine.py w -tf -o tf.txt
+*** ERROR: no arg files - only options! ***
+------------------------------------------------------------
+USE: python ir_engine.py (options)
+OPTIONS:
+    -h : print this help message
+    -s : use "with stoplist" configuration (default: without)
+    -p : use "with stemming" configuration (default: without)
+    -w LABEL : use weighting scheme "LABEL" (LABEL in {binary, tf, tfidf}, default: binary)
+    -o FILE : output results to file FILE
+------------------------------------------------------------
+Haos-MacBook-Pro:IR nyxfer$ python ir_engine.py -w tf -o tf.txt
+ir_engine.py:90: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  self.startTime[label] = time.clock()
+ir_engine.py:93: DeprecationWarning: time.clock has been deprecated in Python 3.3 and will be removed from Python 3.8: use time.perf_counter or time.process_time instead
+  duration = time.clock() - self.startTime[label]
+TIME (retrieval): 0.16
+Haos-MacBook-Pro:IR nyxfer$ python eval_ir.py cacm_gold_std.txt tf.txt 
+-------------------------------------------
+Total number of queries: 64
+Total number of documents over all queries:
+    Retrieved:        640
+    Relevant:         796
+    Rel_Retr:          50
+Prec/Rec/F across all queries:
+    Precision:       0.08
+    Recall:          0.06
+    F-measure:       0.07
+
+Haos-MacBook-Pro:IR nyxfer$ python eval_ir.py cacm_gold_std.txt tf_p.txt 
+-------------------------------------------
+Total number of queries: 64
+Total number of documents over all queries:
+    Retrieved:        640
+    Relevant:         796
+    Rel_Retr:          72
+Prec/Rec/F across all queries:
+    Precision:       0.11
+    Recall:          0.09
+    F-measure:       0.10
+
+Haos-MacBook-Pro:IR nyxfer$ python eval_ir.py cacm_gold_std.txt tfidf.txt
+-------------------------------------------
+Total number of queries: 64
+Total number of documents over all queries:
+    Retrieved:        640
+    Relevant:         796
+    Rel_Retr:         128
+Prec/Rec/F across all queries:
+    Precision:       0.20
+    Recall:          0.16
+    F-measure:       0.18
+
+Haos-MacBook-Pro:IR nyxfer$ python eval_ir.py cacm_gold_std.txt tfidf_s.txt 
+-------------------------------------------
+Total number of queries: 64
+Total number of documents over all queries:
+    Retrieved:        640
+    Relevant:         796
+    Rel_Retr:         134
+Prec/Rec/F across all queries:
+    Precision:       0.21
+    Recall:          0.17
+    F-measure:       0.19
+
+Haos-MacBook-Pro:IR nyxfer$ python eval_ir.py cacm_gold_std.txt tfidf_s_p.txt 
+-------------------------------------------
+Total number of queries: 64
+Total number of documents over all queries:
+    Retrieved:        640
+    Relevant:         796
+    Rel_Retr:         176
+Prec/Rec/F across all queries:
+    Precision:       0.28
+    Recall:          0.22
+    F-measure:       0.25
+
+Haos-MacBook-Pro:IR nyxfer$ python eval_ir.py cacm_gold_std.txt tfidf_p.txt 
+-------------------------------------------
+Total number of queries: 64
+Total number of documents over all queries:
+    Retrieved:        640
+    Relevant:         796
+    Rel_Retr:         171
+Prec/Rec/F across all queries:
+    Precision:       0.27
+    Recall:          0.21
+    F-measure:       0.24
+
+Haos-MacBook-Pro:IR nyxfer$ 
